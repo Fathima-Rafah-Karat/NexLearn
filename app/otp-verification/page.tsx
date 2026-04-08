@@ -29,11 +29,9 @@ const OtpVerification = () => {
                                         SMS Code
                                     </label>
                                     <div className="flex items-center gap-2.5 border border-[#D1D5DB] rounded-[14px] p-4 bg-white focus-within:ring-2 focus-within:ring-[#1C3141]/10 focus-within:border-[#1C3141] transition-all">
-                                        <div className="flex items-center gap-2">
-                                            <span className="text-size-16 font-normal leading-[24px]  text-[#5C5C5C] font-inter">+91</span>
-                                        </div>
+                                      
 
-                                        <Input type="tel" placeholder="1234 567891" className="flex-1 bg-transparent border-none outline-none text-[#1C3141] placeholder:text-[#1C3141]/20 font-inter text-[16px] font-medium leading-[24px] tracking-[0px]" />
+                                        <Input type="number" placeholder="123456" className="flex-1 bg-transparent border-none outline-none text-[#1C3141] placeholder:text-[#1C3141]/20 font-inter text-[16px] font-medium leading-[24px] tracking-[0px]" />
                                     </div>
                                 </div>
                             </form>
