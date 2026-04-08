@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const AddDetails = () => {
     return (
@@ -74,9 +75,9 @@ const AddDetails = () => {
                             </div>
                             <div className="absolute bottom-0 left-0 right-0 bg-white px-[28px] pt-4 pb-[28px] z-50">
                                 <Link href="/instructions">
-                                    <button className="font-inter text-size-16 font-semibold leading-[16px] tracking-[0px] text-[#FFFFFF] bg-color-text w-full py-[15px] rounded-[10px] flex items-center justify-center hover:opacity-90 transition-opacity">
+                                    <Button className="font-inter text-size-16 font-semibold leading-[16px] tracking-[0px] text-[#FFFFFF] bg-color-text w-full py-[15px] rounded-[10px] flex items-center justify-center hover:opacity-90 transition-opacity">
                                         Get Started
-                                    </button>
+                                    </Button>
                                 </Link>
                             </div>
                        
