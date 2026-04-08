@@ -4,16 +4,16 @@ import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Loader2, X, Camera ,Info} from "lucide-react";
+import { Loader2, X, Camera, Info } from "lucide-react";
 
 const AddDetails = () => {
     const router = useRouter();
-    const fileInputRef = useRef<HTMLInputElement>(null);
+    const fileInputRef = useRef(null);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [qualification, setQualification] = useState("");
     const [phone, setPhone] = useState("");
-    const [image, setImage] = useState<File | null>(null);
+    const [image, setImage] = useState(null);
     const [previewUrl, setPreviewUrl] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
@@ -23,7 +23,7 @@ const AddDetails = () => {
         if (storedMobile) setPhone(storedMobile);
     }, []);
 
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleImageChange = (e) => {
         const file = e.target.files?.[0];
         if (file) {
             setImage(file);
@@ -32,7 +32,7 @@ const AddDetails = () => {
         }
     };
 
-    const removeImage = (e: React.MouseEvent) => {
+    const removeImage = (e) => {
         e.stopPropagation();
         setImage(null);
         setPreviewUrl("");
@@ -75,7 +75,7 @@ const AddDetails = () => {
             if (data.success) {
                 if (data.access_token) localStorage.setItem("authToken", data.access_token);
                 if (data.refresh_token) localStorage.setItem("refreshToken", data.refresh_token);
-                
+
                 router.push("/instructions");
             } else {
                 setError(data.message || "Failed to create profile");
@@ -101,13 +101,12 @@ const AddDetails = () => {
                         </div>
                         <Image src="/image/photo1.png" alt="photo" width={335} height={260} priority className="mx-[63px] mb-[26px] w-auto h-auto" />
                     </div>
-                    
                     <div className="relative bg-white h-[540px] m-[10px] rounded-[16px] flex flex-col xl:w-[339px] w-[320px] overflow-hidden">
                         <div className="flex flex-col flex-shrink-0 px-[28px] pt-[28px]">
                             <h1 className="text-color-text text-size-24 font-semibold font-inter leading-[32px] tracking-[0px] pb-[16px]">Add Your Details</h1>
                             <div className="flex flex-col items-center mb-6">
                                 <input type="file" ref={fileInputRef} onChange={handleImageChange} accept="image/*" className="hidden" />
-                                <div 
+                                <div
                                     onClick={() => fileInputRef.current?.click()}
                                     className="relative group w-[132px] h-[127px] border-2 border-dashed border-[#D1D5DB] rounded-xl flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 transition-all overflow-hidden"
                                 >
@@ -117,7 +116,7 @@ const AddDetails = () => {
                                             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                                 <Camera className="text-white w-6 h-6" />
                                             </div>
-                                            <button 
+                                            <button
                                                 onClick={removeImage}
                                                 className="absolute top-2 right-2 bg-white/90 p-1 rounded-full shadow-md hover:bg-red-50 transition-colors"
                                             >
@@ -159,7 +158,7 @@ const AddDetails = () => {
                                 <div className="relative">
                                     <label className="absolute -top-2 left-[14px] bg-white text-size-13 font-normal text-[#5C5C5C] px-[4px] leading-[16px] tracking-[0px] font-inter z-10">Phone number*</label>
                                     <div className="flex items-center gap-2.5 border border-[#D1D5DB] rounded-[14px] p-4 bg-white focus-within:ring-2 focus-within:ring-[#1C3141]/10 focus-within:border-[#1C3141] transition-all">
-                                            <Input type="tel" placeholder="Enter your phone number" className="flex-1 bg-transparent border-none outline-none text-[#1C3141] placeholder:text-[#1C3141]/20 font-inter text-[16px] font-medium leading-[24px] tracking-[0px] px-[24px] py-[16px] rounded-[8px] " />
+                                        <Input value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" placeholder="Enter your phone number" className="flex-1 bg-transparent border-none outline-none text-[#1C3141] placeholder:text-[#1C3141]/20 font-inter text-[16px] font-medium leading-[24px] tracking-[0px] px-2" />
                                     </div>
                                 </div>
                             </form>
@@ -171,7 +170,7 @@ const AddDetails = () => {
                                     <Info className="w-3 h-3" /> {error}
                                 </div>
                             )}
-                            <Button 
+                            <Button
                                 type="button"
                                 disabled={isLoading}
                                 onClick={handleSubmit}
