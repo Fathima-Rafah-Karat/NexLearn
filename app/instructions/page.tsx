@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Instructions=()=>{
     return(
-        <div className="bg-blue-100">
+        <div className="">
             
            <h1 className="">instructions</h1>
         </div>
