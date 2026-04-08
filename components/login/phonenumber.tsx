@@ -19,13 +19,13 @@ const login = () => {
                         <Image src="/image/photo1.png" alt="photo" width={335} height={260} priority className="mx-[63px] mb-[26px] w-auto h-auto" />
 
                     </div>
-                    <div className="bg-white m-[10px] px-[28px] pt-[28px] pb-[28px] rounded-xl  ">
+                    <div className="bg-white m-[10px] px-[28px] pt-[28px] pb-[28px]  rounded-xl  ">
                         <div className="xl:w-[339px] w-[320px] ">
                             <h1 className=" text-color-text text-size-24 font-semibold font-inter leading-[32px] tracking-[0px] pb-[16px]">Enter your phone number</h1>
                             <p className="text-color-text text-size-16 pb-[16px] font-inter font-normal">We use your mobile number to identify your account</p>
                             <form className="mt-2">
                                 <div className="relative">
-                                    <label className="absolute -top-3 left-[14px] bg-white  text-size-13 font-normal text-[#5C5C5C] px-[4px] leading-[16px] tracking-[0px] font-inter z-10">
+                                    <label className="absolute -top-2 left-[14px] bg-white  text-size-13 font-normal text-[#5C5C5C] px-[4px] leading-[16px] tracking-[0px] font-inter z-10">
                                         Phone number
                                     </label>
                                     <div className="flex items-center gap-2.5 border border-[#D1D5DB] rounded-[14px] p-4 bg-white focus-within:ring-2 focus-within:ring-[#1C3141]/10 focus-within:border-[#1C3141] transition-all">
@@ -39,8 +39,8 @@ const login = () => {
                             </form>
                             <p className="pt-[16px] text-color-text text-[11px] text-[#5C5C5C] leading-[16px]">By tapping Get started, you agree to the <span className="font-inter font-normal leading-[16px] tracking-[0px] text-[#1C3141] text-[11px] ">Terms & Conditions</span></p>
                             <Link href="/otp-verification">
-                                <button className="mt-28 font-inter text-size-16 font-semibold leading-[16px] tracking-[0px] text-[#FFFFFF] bg-color-text w-full py-[15px] rounded-[10px] flex items-center justify-center hover:opacity-90 transition-opacity">
-                                    Get Started
+                                <button className="mt-48 font-inter text-size-16 font-semibold leading-[16px] tracking-[0px] text-[#FFFFFF] bg-color-text w-full py-[15px] rounded-[10px] flex items-center justify-center hover:opacity-90 transition-opacity">
+                                Get Started
                                 </button>
                             </Link>
 
