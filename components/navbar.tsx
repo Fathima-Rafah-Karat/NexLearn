@@ -20,7 +20,7 @@ const Navbar = () => {
                     <h1 className="font-poppins leading-none tracking-[0px] font-semibold text-size-25  bg-gradient-to-r from-[#0A93BA] to-[#0B3A4B] bg-clip-text text-transparent inline-block">
                         NexLearn
                     </h1>
-                    <p className="text-size-9 font-poppins font-medium leading-none tracking-[0px] pt-[4px] bg-gradient-to-b  from-[#0B3A4B] to-[#0A93BA] bg-clip-text text-transparent inline-block">
+                    <p className="text-size-9 font-poppins font-medium leading-[9.45px] tracking-[0px] pt-[4px] bg-gradient-to-b  from-[#0B3A4B] to-[#0A93BA] bg-clip-text text-transparent inline-block">
                         futuristic learning
                     </p>
                 </div>
