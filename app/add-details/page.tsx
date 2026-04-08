@@ -119,9 +119,9 @@ const AddDetails = () => {
                                             </div>
                                             <Button
                                                 onClick={removeImage}
-                                                className="absolute top-2 right-2 bg-white/90 p-1 rounded-full shadow-md hover:bg-red-50 transition-colors"
+                                                className="absolute top-2 right-2  p-1  w-3 h-3 "
                                             >
-                                                <X className="w-3 h-3 text-black" />
+                                                <X className=" text-white bg-black  rounded-full" />
                                             </Button>
                                         </>
                                     ) : (
