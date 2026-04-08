@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
@@ -132,9 +132,8 @@ const OtpVerification = () => {
                                 </div>
                                 {error && <p className="text-red-500 text-[12px] mt-2 font-inter">{error}</p>}
                                 <p className="pt-[16px] text-color-text text-[11px] text-[#5C5C5C] leading-[16px]">Your 6 digit code is on its way. This can sometimes take a few moments to arrive.</p>
-                                
                                 <div className="flex items-center justify-between pt-[16px]">
-                                    <p 
+                                    <p
                                         className={`font-inter text-[14px] font-semibold leading-[24px] tracking-[0px] underline underline-offset-2 decoration-solid decoration-[1px] cursor-pointer transition-colors ${resendStatus === 'loading' ? 'text-gray-400' : 'text-black'}`}
                                         onClick={handleResendOtp}
                                     >
