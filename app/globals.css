@@ -14,6 +14,7 @@
   --text-size-16: 16px;
   --text-size-25: 25px;
   --text-size-9: 9px;
+  --text-size-26:26px;
   --color-bg-white:#FFFFFF;
   --color-text: #1C3141;
   --color-placeholder: #CECECE;
@@ -62,6 +63,7 @@
   --text-size-16: var(--text-size-16);
   --text-size-25:var(--text-size-25);
   --text-size-9:var(--text-size-9);
+  --text-size-26:var(--text-size-26);
   --color-bg-white:var(--color-bg-white);
   --color-color-placeholder: var(--color-placeholder);
   
@@ -123,6 +125,7 @@
     --text-size-16: 16px;
     --text-size-25: 25px;
     --text-size-9: 9px;
+    --text-size-26:26px;
     --color-text: #1C3141;
     --color-bg-white:#FFFFFF;
     --color-placeholder: #CECECE;
