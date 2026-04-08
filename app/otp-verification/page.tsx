@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const OtpVerification = () => {
     return (
@@ -38,9 +39,9 @@ const OtpVerification = () => {
                             <p className="pt-[16px] text-color-text text-[11px] text-[#5C5C5C] leading-[16px]">Your 6 digit code is on its way. This can sometimes take a few moments to arrive.</p>
                             <p className="font-inter text-[14px] font-semibold leading-[24px] tracking-[0px] pt-[16px]  underline underline-offset-0 decoration-solid decoration-[1px] ">Resend code</p>
                             <Link href="/add-details">
-                                <button className="mt-48 font-inter text-size-16 font-semibold leading-[16px] tracking-[0px] text-[#FFFFFF] bg-color-text w-full py-[15px] rounded-[10px] flex items-center justify-center hover:opacity-90 transition-opacity">
+                                <Button className="mt-48 font-inter text-size-16 font-semibold leading-[16px] tracking-[0px] text-[#FFFFFF] bg-color-text w-full py-[15px] rounded-[10px] flex items-center justify-center hover:opacity-90 transition-opacity">
                                 Get Started
-                                </button>
+                                </Button>
                             </Link>
 
                         </div>
