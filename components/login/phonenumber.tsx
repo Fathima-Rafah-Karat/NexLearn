@@ -11,17 +11,13 @@ const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
 
-    const handleSendOtp = async (e?: React.FormEvent) => {
-        if (e) e.preventDefault();
-        
+    const handleSendOtp = async () => {
         if (!phoneNumber) {
             setError("Please enter a phone number");
             return;
         }
-
         setIsLoading(true);
         setError("");
-
         try {
             const formData = new FormData();
             formData.append("mobile", `+91${phoneNumber}`);
@@ -30,9 +26,25 @@ const Login = () => {
                 method: "POST",
                 body: formData,
             });
-
+            if (!response.ok) {
+                const contentType = response.headers.get("content-type");
+                if (contentType && contentType.includes("application/json")) {
+                    const errorData = await response.json();
+                    if (response.status === 400) {
+                        setError(errorData.message || "Invalid mobile number format.");
+                    } else if (response.status === 401) {
+                        setError("Unauthorized access. Please try again.");
+                    } else if (response.status === 500) {
+                        setError("Server error. Please try again later.");
+                    } else {
+                        setError(errorData.message || "Something went wrong.");
+                    }
+                } else {
+                    setError(`Error: ${response.status} ${response.statusText}`);
+                }
+                return;
+            }
             const data = await response.json();
-
             if (data.success) {
                 localStorage.setItem("userMobile", `+91${phoneNumber}`);
                 router.push("/otp-verification");
@@ -46,7 +58,6 @@ const Login = () => {
             setIsLoading(false);
         }
     };
-
     return (
         <div className="bg-black min-h-screen w-full flex items-center justify-center p-4 lg:p-10 overflow-y-auto font-inter">
             <div className="bg-blue-900 rounded-[16px]">
@@ -60,13 +71,12 @@ const Login = () => {
                             </div>
                         </div>
                         <Image src="/image/photo1.png" alt="photo" width={335} height={260} priority className="mx-[63px] mb-[26px] w-auto h-auto" />
-
                     </div>
                     <div className="bg-white m-[10px] px-[28px] pt-[28px] pb-[28px]  rounded-xl  ">
                         <div className="xl:w-[339px] w-[320px] ">
                             <h1 className=" text-color-text text-size-24 font-semibold font-inter leading-[32px] tracking-[0px] pb-[16px]">Enter your phone number</h1>
                             <p className="text-color-text text-size-16 pb-[16px] font-inter font-normal">We use your mobile number to identify your account</p>
-                            <form className="mt-2" onSubmit={handleSendOtp}>
+                            <form className="mt-2">
                                 <div className="relative">
                                     <label className="absolute -top-2 left-[14px] bg-white  text-size-13 font-normal text-[#5C5C5C] px-[4px] leading-[16px] tracking-[0px] font-inter z-10">
                                         Phone number
@@ -88,7 +98,8 @@ const Login = () => {
                                 {error && <p className="text-red-500 text-[12px] mt-2 font-inter">{error}</p>}
                                 <p className="pt-[16px] text-color-text text-[11px] text-[#5C5C5C] leading-[16px]">By tapping Get started, you agree to the <span className="font-inter font-normal leading-[16px] tracking-[0px] text-[#1C3141] text-[11px] ">Terms & Conditions</span></p>
                                 <Button 
-                                    type="submit"
+                                    type="button"
+                                    onClick={handleSendOtp}
                                     disabled={isLoading}
                                     className="mt-48 font-inter text-size-16 font-semibold leading-[16px] tracking-[0px] text-[#FFFFFF] bg-color-text w-full py-[15px] rounded-[10px] flex items-center justify-center hover:opacity-90 transition-opacity disabled:opacity-50"
                                 >
@@ -103,4 +114,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Login;
