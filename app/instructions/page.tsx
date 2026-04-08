@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 const Instructions = () => {
@@ -33,6 +34,9 @@ const Instructions = () => {
                     <li className="align-middle leading-[1.54]">Your test results will be displayed immediately after submission, indicating whether you have passed or need to retake the test.</li>
                 </ol>
             </div>
+            <Button className="text-bg-white bg-color-text font-inter rounded-[10px] flex mx-auto mt-[22px] py-[24px] px-[124px] text-[16px] font-semibold leading-[16.88px]">
+                Start Test
+            </Button>
 
         </div>
     );
