@@ -8,12 +8,12 @@ import { Loader2, X, Camera, Info } from "lucide-react";
 
 const AddDetails = () => {
     const router = useRouter();
-    const fileInputRef = useRef(null);
+    const fileInputRef = useRef<any>(null);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [qualification, setQualification] = useState("");
     const [phone, setPhone] = useState("");
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState<any>(null);
     const [previewUrl, setPreviewUrl] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
@@ -23,7 +23,7 @@ const AddDetails = () => {
         if (storedMobile) setPhone(storedMobile);
     }, []);
 
-    const handleImageChange = (e) => {
+    const handleImageChange = (e: any) => {
         const file = e.target.files?.[0];
         if (file) {
             setImage(file);
@@ -32,7 +32,7 @@ const AddDetails = () => {
         }
     };
 
-    const removeImage = (e) => {
+    const removeImage = (e: any) => {
         e.stopPropagation();
         setImage(null);
         setPreviewUrl("");
@@ -101,6 +101,7 @@ const AddDetails = () => {
                         </div>
                         <Image src="/image/photo1.png" alt="photo" width={335} height={260} priority className="mx-[63px] mb-[26px] w-auto h-auto" />
                     </div>
+
                     <div className="relative bg-white h-[540px] m-[10px] rounded-[16px] flex flex-col xl:w-[339px] w-[320px] overflow-hidden">
                         <div className="flex flex-col flex-shrink-0 px-[28px] pt-[28px]">
                             <h1 className="text-color-text text-size-24 font-semibold font-inter leading-[32px] tracking-[0px] pb-[16px]">Add Your Details</h1>
@@ -116,12 +117,12 @@ const AddDetails = () => {
                                             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                                 <Camera className="text-white w-6 h-6" />
                                             </div>
-                                            <button
+                                            <Button
                                                 onClick={removeImage}
                                                 className="absolute top-2 right-2 bg-white/90 p-1 rounded-full shadow-md hover:bg-red-50 transition-colors"
                                             >
                                                 <X className="w-3 h-3 text-black" />
-                                            </button>
+                                            </Button>
                                         </>
                                     ) : (
                                         <>
