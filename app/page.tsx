@@ -1,10 +1,18 @@
-import React from "react";
+import react from "react";
+import Login from "@/components/login/phonenumber";
+import { Metadata } from "next";
 
-const login=()=>{
+export const metadata: Metadata = {
+  title: 'login | NexLearn',
+  description:
+    'NexLearn provides immersive e-learning simulations and AI-driven personalized training for skills development and futuristic learning experiences.',
+};
+
+const page = () => {
   return (
     <div>
-      <h1>login page</h1>
+      <Login />
     </div>
   )
 }
-export default login;
+export default page;
