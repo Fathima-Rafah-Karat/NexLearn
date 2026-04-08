@@ -19,6 +19,34 @@ const OtpVerification = () => {
             router.push("/");
         }
     }, [router]);
+    const [resendStatus, setResendStatus] = useState("");
+
+    const handleResendOtp = async () => {
+        if (!mobile || resendStatus === "loading") return;
+
+        setResendStatus("loading");
+        setError("");
+
+        try {
+            const formData = new FormData();
+            formData.append("mobile", mobile);
+
+            const response = await fetch("https://nexlearn.noviindusdemosites.in/auth/send-otp", {
+                method: "POST",
+                body: formData,
+            });
+
+            if (!response.ok) throw new Error("Failed to resend");
+
+            setResendStatus("success");
+            setTimeout(() => setResendStatus(""), 3000);
+        } catch (err) {
+            setResendStatus("error");
+            setError("Failed to resend code. Please try again.");
+            console.error("Resend error:", err);
+        }
+    };
+
     const handleVerifyOtp = async () => {
         if (!otp) {
             setError("Please enter the OTP");
@@ -82,7 +110,6 @@ const OtpVerification = () => {
                             </div>
                         </div>
                         <Image src="/image/photo1.png" alt="photo" width={335} height={260} priority className="mx-[63px] mb-[26px] w-auto h-auto" />
-
                     </div>
                     <div className="bg-white m-[10px] px-[28px] pt-[28px] pb-[28px] rounded-xl  ">
                         <div className="xl:w-[339px] w-[320px] ">
@@ -91,22 +118,31 @@ const OtpVerification = () => {
                             <form className="mt-2">
                                 <div className="relative">
                                     <label className=" absolute -top-2 left-[14px] bg-white  text-size-13 font-normal text-[#5C5C5C] px-[4px] leading-[16px] tracking-[0px] font-inter z-10">
-                                         SMS Code
-                                     </label>
-                                     <div className="flex items-center gap-2.5 border border-[#D1D5DB] rounded-[14px] p-4 bg-white focus-within:ring-2 focus-within:ring-[#1C3141]/10 focus-within:border-[#1C3141] transition-all">
-                                         <Input 
-                                             type="number" 
-                                             placeholder="123 456" 
-                                             value={otp}
-                                             onChange={(e) => setOtp(e.target.value)}
-                                             className="flex-1 bg-transparent border-none outline-none text-[#1C3141] placeholder:text-[#1C3141]/20 font-inter text-[16px] font-medium leading-[24px] tracking-[0px] focus-visible:ring-0 focus-visible:ring-offset-0" 
-                                         />
-                                     </div>
+                                        SMS Code
+                                    </label>
+                                    <div className="flex items-center gap-2.5 border border-[#D1D5DB] rounded-[14px] p-4 bg-white focus-within:ring-2 focus-within:ring-[#1C3141]/10 focus-within:border-[#1C3141] transition-all">
+                                        <Input
+                                            type="number"
+                                            placeholder="123 456"
+                                            value={otp}
+                                            onChange={(e) => setOtp(e.target.value)}
+                                            className="flex-1 bg-transparent border-none outline-none text-[#1C3141] placeholder:text-[#1C3141]/20 font-inter text-[16px] font-medium leading-[24px] tracking-[0px] focus-visible:ring-0 focus-visible:ring-offset-0"
+                                        />
+                                    </div>
                                 </div>
                                 {error && <p className="text-red-500 text-[12px] mt-2 font-inter">{error}</p>}
                                 <p className="pt-[16px] text-color-text text-[11px] text-[#5C5C5C] leading-[16px]">Your 6 digit code is on its way. This can sometimes take a few moments to arrive.</p>
-                                <p className="font-inter text-[14px] font-semibold leading-[24px] tracking-[0px] pt-[16px] underline underline-offset-0 decoration-solid decoration-[1px] cursor-pointer">Resend code</p>
-                                <Button 
+                                
+                                <div className="flex items-center justify-between pt-[16px]">
+                                    <p 
+                                        className={`font-inter text-[14px] font-semibold leading-[24px] tracking-[0px] underline underline-offset-2 decoration-solid decoration-[1px] cursor-pointer transition-colors ${resendStatus === 'loading' ? 'text-gray-400' : 'text-black'}`}
+                                        onClick={handleResendOtp}
+                                    >
+                                        {resendStatus === 'loading' ? 'Resending...' : 'Resend code'}
+                                    </p>
+                                </div>
+
+                                <Button
                                     type="button"
                                     onClick={handleVerifyOtp}
                                     disabled={isLoading}
