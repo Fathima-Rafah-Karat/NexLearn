@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { Button } from "../ui/button";
 
 const login = () => {
     return (
@@ -39,9 +40,9 @@ const login = () => {
                             </form>
                             <p className="pt-[16px] text-color-text text-[11px] text-[#5C5C5C] leading-[16px]">By tapping Get started, you agree to the <span className="font-inter font-normal leading-[16px] tracking-[0px] text-[#1C3141] text-[11px] ">Terms & Conditions</span></p>
                             <Link href="/otp-verification">
-                                <button className="mt-48 font-inter text-size-16 font-semibold leading-[16px] tracking-[0px] text-[#FFFFFF] bg-color-text w-full py-[15px] rounded-[10px] flex items-center justify-center hover:opacity-90 transition-opacity">
+                                <Button className="mt-48 font-inter text-size-16 font-semibold leading-[16px] tracking-[0px] text-[#FFFFFF] bg-color-text w-full py-[15px] rounded-[10px] flex items-center justify-center hover:opacity-90 transition-opacity">
                                     Started
-                                </button>
+                                </Button>
                             </Link>
 
                         </div>
