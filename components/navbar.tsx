@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { Button } from "./ui/button";
 
 const Navbar = () => {
     const pathname = usePathname();
@@ -26,9 +27,9 @@ const Navbar = () => {
                 </div>
             </div>
             <div className="flex items-center ">
-                <button className=" px-[16px] py-[7px] rounded-[6px] text-white font-inter text-[13px]  bg-[#177A9C] font-medium font-semibold text-color-text  transition-all cursor-pointer">
+                <Button className=" px-[16px] py-[7px] rounded-[6px] text-white font-inter text-[13px]  bg-[#177A9C] font-medium font-semibold text-color-text  transition-all cursor-pointer">
                     Logout
-                </button>
+                </Button>
             </div>
         </nav>
     );
