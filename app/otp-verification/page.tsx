@@ -31,14 +31,15 @@ const OtpVerification = () => {
                                     <div className="flex items-center gap-2.5 border border-[#D1D5DB] rounded-[14px] p-4 bg-white focus-within:ring-2 focus-within:ring-[#1C3141]/10 focus-within:border-[#1C3141] transition-all">
                                       
 
-                                        <Input type="number" placeholder="123456" className="flex-1 bg-transparent border-none outline-none text-[#1C3141] placeholder:text-[#1C3141]/20 font-inter text-[16px] font-medium leading-[24px] tracking-[0px]" />
+                                        <Input type="number" placeholder="123 456" className="flex-1 bg-transparent border-none  outline-none text-[#1C3141] placeholder:text-[#1C3141]/20 font-inter text-[16px] font-medium leading-[24px] tracking-[0px]" />
                                     </div>
                                 </div>
                             </form>
-                            <p className="pt-[16px] text-color-text text-[11px] text-[#5C5C5C] leading-[16px]">By tapping Get started, you agree to the <span className="font-inter font-normal leading-[16px] tracking-[0px] text-[#1C3141] text-[11px] ">Terms & Conditions</span></p>
+                            <p className="pt-[16px] text-color-text text-[11px] text-[#5C5C5C] leading-[16px]">Your 6 digit code is on its way. This can sometimes take a few moments to arrive.</p>
+                            <p className="font-inter text-[14px] font-semibold leading-[24px] tracking-[0px] pt-[16px]  underline underline-offset-0 decoration-solid decoration-[1px] ">Resend code</p>
                             <Link href="/otp-verification">
                                 <button className="mt-48 font-inter text-size-16 font-semibold leading-[16px] tracking-[0px] text-[#FFFFFF] bg-color-text w-full py-[15px] rounded-[10px] flex items-center justify-center hover:opacity-90 transition-opacity">
-                                    Get Started
+                                Get Started
                                 </button>
                             </Link>
 
