@@ -11,6 +11,8 @@ import {
     DialogTrigger,
     DialogClose,
 } from "@/components/ui/dialog";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 import { Clock, ChevronRight, Loader2 } from "lucide-react";
 const Mcq = () => {
     const router = useRouter();
@@ -154,14 +156,14 @@ const Mcq = () => {
                 <div className="flex-1 flex flex-col bg-blue-50">
                     <div className="px-6 py-3.5 flex items-center justify-between bg-blue-50">
                         <h1 className="text-[#1C3141] font-medium text-[15px]">Ancient Indian History MCQ</h1>
-                        <span className="border border-[#CBD5E1] px-3 py-0.5  text-[#1C3141] font-medium text-[13px] bg-[#F8FAFC]">
+                        <span className=" rounded-[4px] px-3 py-0.5  text-[#1C3141] font-medium text-[13px] bg-white ]">
                             {(currentIndex + 1).toString().padStart(2, '0')}/{questions.length}
                         </span>
                     </div>
 
                     <div className="flex-1  md:px-4 scrollbar-hide">
 
-                        <div className="bg-white border border-[#E2E8F0] rounded-xl p-6 md:p-8 shadow-sm mb-3">
+                        <div className="bg-white border border-[#E2E8F0] shadow-[0px_0px_12px_4px_#00000017] rounded-xl p-6 md:p-8 mb-3">
                             <Dialog>
                                 <DialogTrigger asChild>
                                     <Button variant="outline" className="mb-8 bg-[#177A9C] text-white border-none py-1.5 h-9 px-5 flex items-center gap-2 rounded-md hover:bg-[#136683] text-xs font-semibold uppercase tracking-wide shadow-sm transition-all hover:scale-[1.02]">
@@ -203,26 +205,34 @@ const Mcq = () => {
                         </div>
                         <p className="mb-3 pl-5 text-size-14 text-[#5C5C5C] leading-[14px]">choose the answer</p>
                         <div className="mb-8 pl-1">
-                            <div className="grid gap-3">
+                            <RadioGroup
+                                value={answers[currentIndex] !== undefined ? String(answers[currentIndex]) : ""}
+                                onValueChange={(val) => handleOptionSelect(Number(val))}
+                                className="grid gap-3"
+                            >
                                 {currentQuestion.options.map((optObj, idx) => (
-                                    <button
+                                    <div
                                         key={idx}
                                         onClick={() => handleOptionSelect(idx)}
-                                        className={`flex items-center px-6 py-4 rounded-md border border-[#E2E8F0] transition-all text-left group ${answers[currentIndex] === idx
+                                        className={`flex items-center justify-between space-x-2 px-6 py-4 rounded-md border transition-all cursor-pointer group ${answers[currentIndex] === idx
                                             ? "bg-[#F8FAFC] border-[#1C3141]"
-                                            : "bg-[#F8FAFC] hover:border-[#CBD5E1] text-[#1C3141]"
+                                            : "bg-[#F8FAFC] border-[#E2E8F0] hover:border-[#CBD5E1] text-[#1C3141]"
                                             }`}
                                     >
-                                        <span className="flex-1 text-[15px] font-medium">
+                                        <Label
+                                            htmlFor={`option-${idx}`}
+                                            className="flex-1 text-[15px] font-medium cursor-pointer"
+                                        >
                                             {String.fromCharCode(65 + idx)}. {optObj.option}
-                                        </span>
-                                        <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${answers[currentIndex] === idx ? "border-[#1C3141] bg-white ring-2 ring-inset ring-[#1C3141]" : "border-[#CBD5E1]"
-                                            }`}>
-                                            {answers[currentIndex] === idx && <div className="w-2.5 h-2.5 bg-[#1C3141] rounded-full" />}
-                                        </div>
-                                    </button>
+                                        </Label>
+                                        <RadioGroupItem
+                                            value={String(idx)}
+                                            id={`option-${idx}`}
+                                            className={`w-5 h-5 border-2 transition-colors ${answers[currentIndex] === idx ? "border-[#1C3141] text-[#1C3141]" : "border-[#CBD5E1]"}`}
+                                        />
+                                    </div>
                                 ))}
-                            </div>
+                            </RadioGroup>
                         </div>
                     </div>
 
