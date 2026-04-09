@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { Clock, ChevronRight, Loader2, FileText, CheckSquare, Flag, Bookmark, X } from "lucide-react";
+import { Clock, ChevronRight, Loader2, FileText, CheckSquare, Flag, Bookmark, X, XSquare, List } from "lucide-react";
 const Mcq = () => {
     const router = useRouter();
     const [questions, setQuestions] = useState([]);
@@ -28,6 +28,8 @@ const Mcq = () => {
     const [isSubmitDialogOpen, setIsSubmitDialogOpen] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submissionTime, setSubmissionTime] = useState(0);
+    const [isResultDialogOpen, setIsResultDialogOpen] = useState(false);
+    const [resultData, setResultData] = useState(null);
 
     const questionsRef = useRef([]);
     const answersRef = useRef({});
@@ -145,7 +147,7 @@ const Mcq = () => {
 
             const result = await response.json();
             if (result.success) {
-                // Transform result to match what ResultsPage expects
+                // Transform result for dialog display
                 const timeTakenSecs = Math.max(0, totalTime - finalTime);
                 const transformedResult = {
                     score: result.score || 0,
@@ -155,10 +157,9 @@ const Mcq = () => {
                     skipped: result.not_attended || 0,
                     timeSpent: formatTime(timeTakenSecs),
                     remainingTime: formatTime(finalTime),
-                    userName: "Explorer" // Fallback name
                 };
-                sessionStorage.setItem("lastResult", JSON.stringify(transformedResult));
-                router.push("/results");
+                setResultData(transformedResult);
+                setIsResultDialogOpen(true);
             } else {
                 console.error("Submission failed:", result);
                 alert("Submission failed. Please try again.");
