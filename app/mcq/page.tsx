@@ -11,34 +11,43 @@ import {
     DialogTrigger,
     DialogClose,
 } from "@/components/ui/dialog";
-import { Clock, ChevronRight } from "lucide-react";
-
-const MOCK_QUESTIONS = Array.from({ length: 100 }, (_, i) => {
-    const topics = ["Indus Valley Civilization", "Maurya Empire", "Vedic Era", "Gupta Dynasty", "Kushana Empire", "Sangam Period", "Ancient Trade Routes"];
-    const topic = topics[i % topics.length];
-    const focuses = ["Urban Planning", "Administrative Reforms", "Religious Structures", "Art and Architecture", "Military Strategy", "Social Hierarchies", "Economic Systems"];
-    const focus = focuses[i % focuses.length];
-
-    return {
-        id: i + 1,
-        question: `In the context of ${topic}, which of the following best describes the ${focus} that significantly impacted Ancient Indian History?`,
-        options: [
-            `The implementation of specialized ${focus} techniques`,
-            `A transition towards more decentralized ${focus}`,
-            `The widespread adoption of ${focus} from neighboring regions`,
-            `A decline in ${focus} due to external invasions`
-        ],
-        answer: 0
-    };
-});
-
+import { Clock, ChevronRight, Loader2 } from "lucide-react";
 const Mcq = () => {
     const router = useRouter();
+    const [questions, setQuestions] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [answers, setAnswers] = useState({});
     const [markedForReview, setMarkedForReview] = useState({});
     const [visited, setVisited] = useState({ 0: true });
     const [timeLeft, setTimeLeft] = useState(100 * 60);
+
+    useEffect(() => {
+        const fetchQuestions = async () => {
+            try {
+                const token = localStorage.getItem("authToken") || "";
+                const response = await fetch("https://nexlearn.noviindusdemosites.in/question/list", {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    }
+                });
+                const data = await response.json();
+                if (data.success && data.questions) {
+                    setQuestions(data.questions);
+                    if (data.total_time) {
+                        setTimeLeft(data.total_time * 60);
+                    }
+                }
+            } catch (err) {
+                console.error("Error fetching questions:", err);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchQuestions();
+    }, []);
 
     useEffect(() => {
         if (timeLeft <= 0) {
@@ -68,7 +77,7 @@ const Mcq = () => {
     };
 
     const handleNext = () => {
-        if (currentIndex < MOCK_QUESTIONS.length - 1) {
+        if (currentIndex < questions.length - 1) {
             const nextIdx = currentIndex + 1;
             setCurrentIndex(nextIdx);
             setVisited({ ...visited, [nextIdx]: true });
@@ -98,7 +107,7 @@ const Mcq = () => {
         }
     };
 
-    const currentQuestion = MOCK_QUESTIONS[currentIndex];
+    const currentQuestion = questions[currentIndex];
     const getQuestionStatus = (index) => {
         const isAnswered = answers[index] !== undefined;
         const isMarked = markedForReview[index];
@@ -121,6 +130,23 @@ const Mcq = () => {
         }
     };
 
+    if (isLoading) {
+        return (
+            <div className="min-h-screen bg-blue-400 flex flex-col items-center justify-center font-inter">
+                <Loader2 className="w-12 h-12 text-white animate-spin mb-4" />
+                <h1 className="text-white text-xl font-medium">Loading ...</h1>
+            </div>
+        );
+    }
+
+    if (!questions.length) {
+        return (
+            <div className="min-h-screen bg-blue-400 flex flex-col items-center justify-center font-inter">
+                <h1 className="text-white text-xl font-medium">No questions available.</h1>
+            </div>
+        );
+    }
+
     return (
         <div className="min-h-screen bg-blue-400 flex flex-col font-inter">
             <div className="flex-1 flex flex-col lg:flex-row overflow-hidden h-screen">
@@ -129,7 +155,7 @@ const Mcq = () => {
                     <div className="px-6 py-3.5 flex items-center justify-between bg-blue-50">
                         <h1 className="text-[#1C3141] font-medium text-[15px]">Ancient Indian History MCQ</h1>
                         <span className="border border-[#CBD5E1] px-3 py-0.5 rounded-md text-[#1C3141] font-medium text-[13px] bg-[#F8FAFC]">
-                            {(currentIndex + 1).toString().padStart(2, '0')}/{MOCK_QUESTIONS.length}
+                            {(currentIndex + 1).toString().padStart(2, '0')}/{questions.length}
                         </span>
                     </div>
 
@@ -178,7 +204,7 @@ const Mcq = () => {
                         <p className="mb-3 pl-5 text-size-14 text-[#5C5C5C] leading-[14px]">choose the answer</p>
                         <div className="mb-8 pl-1">
                             <div className="grid gap-3">
-                                {currentQuestion.options.map((option, idx) => (
+                                {currentQuestion.options.map((optObj, idx) => (
                                     <button
                                         key={idx}
                                         onClick={() => handleOptionSelect(idx)}
@@ -188,7 +214,7 @@ const Mcq = () => {
                                             }`}
                                     >
                                         <span className="flex-1 text-[15px] font-medium">
-                                            {String.fromCharCode(65 + idx)}. {option}
+                                            {String.fromCharCode(65 + idx)}. {optObj.option}
                                         </span>
                                         <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${answers[currentIndex] === idx ? "border-[#1C3141] bg-white ring-2 ring-inset ring-[#1C3141]" : "border-[#CBD5E1]"
                                             }`}>
@@ -216,7 +242,7 @@ const Mcq = () => {
                             Previous
                         </Button>
 
-                        {currentIndex === MOCK_QUESTIONS.length - 1 ? (
+                        {currentIndex === questions.length - 1 ? (
                             <Button
                                 onClick={handleSubmit}
                                 className="flex-1 py-7 bg-[#1C3141] hover:bg-[#0F1C25] text-white rounded-md text-[17px] font-semibold transition-all active:scale-95"
@@ -250,7 +276,7 @@ const Mcq = () => {
                         </div>
 
                         <div className="grid grid-cols-10 gap-x-2 gap-y-4  mb-8 overflow-y-auto scrollbar-hide pr-1 pt-3 pl-3">
-                            {MOCK_QUESTIONS.map((_, idx) => (
+                            {questions.map((_, idx) => (
                                 <button
                                     key={idx}
                                     onClick={() => handleJumpToQuestion(idx)}
