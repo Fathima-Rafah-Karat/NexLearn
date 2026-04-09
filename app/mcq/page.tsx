@@ -367,7 +367,7 @@ const Mcq = () => {
                         </div>
 
                         <div className="mt-auto pt-8 ">
-                            <div className="flex flex-row gap-y-5 gap-x-5">
+                            <div className="flex xl:flex-row flex-col gap-y-5 gap-x-5">
                                 <div className="flex items-center gap-3 text-[13px] font-medium text-[#1C3141] font-inter">
                                     <div className="w-6 h-6 bg-[#4CAF50] rounded-sm" /> Attended
                                 </div>
