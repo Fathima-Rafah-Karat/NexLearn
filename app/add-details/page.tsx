@@ -89,7 +89,7 @@ const AddDetails = () => {
     };
     return (
         <div className="bg-black min-h-screen w-full flex items-center justify-center p-4 lg:p-10 overflow-y-auto">
-            <div className="bg-blue-900 rounded-[16px]">
+            <div className="bg-blue-900 rounded-[16px] w-full max-w-[760px]">
                 <div className="flex md:flex-row flex-col">
                     <div className="gap-[92px] flex flex-col">
                         <div className="flex flex-row gap-[11px]">
@@ -102,7 +102,7 @@ const AddDetails = () => {
                         <Image src="/image/photo1.png" alt="photo" width={335} height={260} priority className="mx-[63px] mb-[26px] w-auto h-auto" />
                     </div>
 
-                    <div className="relative bg-white h-[540px] m-[10px] rounded-[16px] flex flex-col xl:w-[339px] w-[320px] overflow-hidden">
+                    <div className="relative bg-white min-h-[540px] md:h-[540px] m-[10px] rounded-[16px] flex flex-col w-[calc(100%-20px)] md:w-[339px] overflow-hidden">
                         <div className="flex flex-col flex-shrink-0 px-[28px] pt-[28px]">
                             <h1 className="text-color-text text-size-24 font-semibold font-inter leading-[32px] tracking-[0px] pb-[16px]">Add Your Details</h1>
                             <div className="flex flex-col items-center mb-6">
