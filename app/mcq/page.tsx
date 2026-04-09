@@ -168,7 +168,8 @@ const Mcq = () => {
                                 <DialogTrigger asChild>
                                     <Button variant="outline" className="mb-8 bg-[#177A9C] text-white border-none py-1.5 h-9 px-5 flex items-center gap-2 rounded-md hover:bg-[#136683] text-xs font-semibold uppercase tracking-wide shadow-sm transition-all hover:scale-[1.02]">
                                         <Image src="/icon/ArticleNYTimes.png" alt="file" width={16} height={16} className="brightness-200" />
-                                        Read Comprehensive Paragraph <ChevronRight className="w-4 h-4 ml-1" />
+                                        Read Comprehensive Paragraph
+                                        <Image src="/icon/Polygon.png" alt="arrow" width={13} height={4} className=" h-3 w-3 ml-1" />
                                     </Button>
                                 </DialogTrigger>
                                 <DialogContent className="max-w-[1200px] w-[95vw] bg-white border-[#E2E8F0] p-6 md:p-10 rounded-[10px] gap-0">
