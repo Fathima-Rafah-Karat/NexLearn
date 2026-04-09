@@ -1,16 +1,34 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 
 const Navbar = () => {
     const pathname = usePathname();
+    const router = useRouter();
     const noNavbarRoutes = ["/", "/otp-verification", "/add-details"];
 
     if (noNavbarRoutes.includes(pathname)) {
         return null;
     }
+
+    const handleLogout =async ()=>{
+        try{
+            const token = localStorage.getItem("authToken");
+           const response = await fetch("https://nexlearn.noviindusdemosites.in/auth/logout", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+        }
+        catch (error) {
+            console.error("Logout error:", error);
+            localStorage.clear();
+            router.push("/");
+        }
+    };
 
     return (
         <nav className="bg-white flex items-center justify-between px-[20px] md:px-[80px] py-[15px] relative border-b-[1.43px] border-[#E9EBEC]">
