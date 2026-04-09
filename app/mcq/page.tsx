@@ -154,12 +154,12 @@ const Mcq = () => {
                 <div className="flex-1 flex flex-col bg-blue-50">
                     <div className="px-6 py-3.5 flex items-center justify-between bg-blue-50">
                         <h1 className="text-[#1C3141] font-medium text-[15px]">Ancient Indian History MCQ</h1>
-                        <span className="border border-[#CBD5E1] px-3 py-0.5 rounded-md text-[#1C3141] font-medium text-[13px] bg-[#F8FAFC]">
+                        <span className="border border-[#CBD5E1] px-3 py-0.5  text-[#1C3141] font-medium text-[13px] bg-[#F8FAFC]">
                             {(currentIndex + 1).toString().padStart(2, '0')}/{questions.length}
                         </span>
                     </div>
 
-                    <div className="flex-1 overflow-y-auto p-4 md:px-8 md:py-8 scrollbar-hide">
+                    <div className="flex-1  md:px-4 scrollbar-hide">
 
                         <div className="bg-white border border-[#E2E8F0] rounded-xl p-6 md:p-8 shadow-sm mb-3">
                             <Dialog>
@@ -274,7 +274,6 @@ const Mcq = () => {
                                 </div>
                             </div>
                         </div>
-
                         <div className="grid grid-cols-10 gap-x-2 gap-y-4  mb-8 overflow-y-auto scrollbar-hide pr-1 pt-3 pl-3 pb-3">
                             {questions.map((_, idx) => (
                                 <button
