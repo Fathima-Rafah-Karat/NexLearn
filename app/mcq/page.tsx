@@ -245,7 +245,7 @@ const Mcq = () => {
                                         <Image src="/icon/Polygon.png" alt="arrow" width={13} height={4} className=" h-3 w-3 ml-1" />
                                     </Button>
                                 </DialogTrigger>
-                                <DialogContent showClose={false} className="w-[calc(100vw-1rem)] sm:w-[95vw] max-w-[1200px] max-h-[90vh] bg-white border-[#E2E8F0] p-4 sm:p-6 md:p-10 rounded-[10px] gap-0 overflow-hidden flex flex-col">
+                                <DialogContent showCloseButton={false} className="w-[calc(100vw-1rem)] sm:w-[95vw] max-w-[1500px] max-h-[90vh] bg-white border-[#E2E8F0] p-4 sm:p-6 md:p-10 rounded-[10px] gap-0 overflow-hidden flex flex-col">
                                     <DialogHeader className="border-b border-[#E2E8F0] pb-4 mb-4 sm:mb-6 relative flex-shrink-0">
                                         <DialogTitle className="text-[#1C3141] text-[15px] sm:text-[16px] font-semibold text-left">Comprehensive Paragraph</DialogTitle>
                                     </DialogHeader>
