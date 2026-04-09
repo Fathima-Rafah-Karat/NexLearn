@@ -234,7 +234,7 @@ const Mcq = () => {
                         </span>
                     </div>
 
-                    <div className="flex-1  md:px-4 scrollbar-hide">
+                    <div className="flex-1 px-6 scrollbar-hide">
 
                         <div className="bg-white border border-[#E2E8F0] shadow-[0px_0px_12px_4px_#00000017] rounded-xl p-6 md:p-8 mb-3">
                             <Dialog>
@@ -272,8 +272,8 @@ const Mcq = () => {
                                 {currentIndex + 1}. {currentQuestion.question}
                             </h2>
                         </div>
-                        <p className="mb-3 pl-5 text-size-14 text-[#5C5C5C] leading-[14px]">choose the answer</p>
-                        <div className="mb-8 pl-1">
+                        <p className="mb-3 text-size-14 text-[#5C5C5C] leading-[14px]">choose the answer</p>
+                        <div className="mb-8">
                             <RadioGroup
                                 value={answers[currentIndex] !== undefined ? String(answers[currentIndex]) : ""}
                                 onValueChange={(val) => handleOptionSelect(Number(val))}
