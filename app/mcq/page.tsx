@@ -215,20 +215,20 @@ const Mcq = () => {
                                         key={idx}
                                         onClick={() => handleOptionSelect(idx)}
                                         className={`flex items-center justify-between space-x-2 px-6 py-4 rounded-md border transition-all cursor-pointer group ${answers[currentIndex] === idx
-                                            ? "bg-[#F8FAFC] border-[#1C3141]"
-                                            : "bg-[#F8FAFC] border-[#E2E8F0] hover:border-[#CBD5E1] text-[#1C3141]"
+                                            ? "bg-bg-white border-[#1C3141]"
+                                            : "bg-bg-white border-[#E2E8F0] text-[#1C3141]"
                                             }`}
                                     >
                                         <Label
                                             htmlFor={`option-${idx}`}
-                                            className="flex-1 text-[15px] font-medium cursor-pointer"
+                                            className="flex-1 text-[15px] font-medium cursor-pointer text-[#1C3141] "
                                         >
                                             {String.fromCharCode(65 + idx)}. {optObj.option}
                                         </Label>
                                         <RadioGroupItem
                                             value={String(idx)}
                                             id={`option-${idx}`}
-                                            className={`w-5 h-5 border-2 transition-colors ${answers[currentIndex] === idx ? "border-[#1C3141] text-[#1C3141]" : "border-[#CBD5E1]"}`}
+                                            className={`w-5 h-5 border-2 transition-colors data-[state=checked]:bg-white data-[state=checked]:border-[#1C3141] data-[state=checked]:text-[#1C3141] ${answers[currentIndex] === idx ? "border-[#1C3141]" : "border-[#49454F]"}`}
                                         />
                                     </div>
                                 ))}
