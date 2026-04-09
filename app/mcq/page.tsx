@@ -167,7 +167,7 @@ const Mcq = () => {
                             <Dialog>
                                 <DialogTrigger asChild>
                                     <Button variant="outline" className="mb-8 bg-[#177A9C] text-white border-none py-1.5 h-9 px-5 flex items-center gap-2 rounded-md hover:bg-[#136683] text-xs font-semibold uppercase tracking-wide shadow-sm transition-all hover:scale-[1.02]">
-                                        <Image src="/icon/file.png" alt="file" width={16} height={16} className="brightness-200" />
+                                        <Image src="/icon/ArticleNYTimes.png" alt="file" width={16} height={16} className="brightness-200" />
                                         Read Comprehensive Paragraph <ChevronRight className="w-4 h-4 ml-1" />
                                     </Button>
                                 </DialogTrigger>
