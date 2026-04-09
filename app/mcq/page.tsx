@@ -414,7 +414,7 @@ const Mcq = () => {
                         <div className="flex items-center justify-between  bg-white rounded-lg mb-[25px] ">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-[#F59E0B] rounded-md">
-                                    <Image src="/icon/file.png" alt="file" width={20} height={20} className="w-5 h-5 " />
+                                    <Image src="/icon/question.png" alt="file" width={20} height={20} className="w-5 h-5 " />
                                 </div>
                                 <span className="text-[#1C3141] font-medium">Total Questions:</span>
                             </div>
@@ -424,7 +424,7 @@ const Mcq = () => {
                         <div className="flex items-center justify-between  bg-white rounded-lg mb-[25px] ">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-[#4CAF50] rounded-md">
-                                    <CheckSquare className="w-5 h-5 text-white" />
+                                     <Image src="/icon/question.png" alt="file" width={20} height={20} className="w-5 h-5 " />
                                 </div>
                                 <span className="text-[#1C3141] font-medium">Questions Answered:</span>
                             </div>
@@ -434,7 +434,7 @@ const Mcq = () => {
                         <div className="flex items-center justify-between  bg-white rounded-lg ">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-[#8B1E7F] rounded-md">
-                                    <Bookmark className="w-5 h-5 text-white" />
+                                    <Image src="/icon/question.png" alt="file" width={20} height={20} className="w-5 h-5 " />
                                 </div>
                                 <span className="text-[#1C3141] text-size-16 font-medium">Marked for review:</span>
                             </div>
