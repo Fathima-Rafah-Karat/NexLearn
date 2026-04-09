@@ -28,8 +28,8 @@ const Instructions = () => {
             <div className="mt-8 mx-auto max-w-[682px] bg-[#1C3141] rounded-[15px] py-6 md:py-[22.42px] flex flex-col md:flex-row justify-center items-center text-white shadow-lg divide-y md:divide-y-0 md:divide-x divide-white/30">
                 {stats.map((stat, index) => (
                     <div key={index} className="flex flex-col items-center px-6 py-4 md:py-0 md:px-[40px] md:first:pl-[57px] md:last:pr-[57px] w-full md:w-auto">
-                        <p className="text-white/80 text-[14px] md:text-size-15 font-inter font-semibold leading-relaxed md:leading-[21.6px] mb-2 md:mb-[24px] whitespace-nowrap">{stat.label}</p>
-                        <p className="text-white text-[32px] md:text-size-42 font-inter font-medium leading-none">{stat.value}</p>
+                        <p className="text-bg-white text-[14px] md:text-size-15 font-inter font-semibold leading-relaxed md:leading-[21.6px] mb-2 md:mb-[24px] whitespace-nowrap">{stat.label}</p>
+                        <p className="text-bg-white text-[32px] md:text-size-42 font-inter font-medium leading-none">{stat.value}</p>
                     </div>
                 ))}
             </div>
