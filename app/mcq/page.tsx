@@ -239,7 +239,7 @@ const Mcq = () => {
                     <div className="bg-[#F0F4F8] p-4 flex gap-[11px] items-center justify-between">
                         <Button
                             onClick={handleMarkForReview}
-                            className="flex-1 px-[29px] py-[20px] bg-[#8B1E7F] hover:bg-[#701867] text-white rounded-md text-size-16 font-semibold transition-all active:scale-95"
+                            className="flex-1 px-[29px] py-[20px] bg-[#800080] hover:bg-[#701867] text-[#FFFFFF] rounded-md text-[16px]  transition-all active:scale-95"
                         >
                             Mark for review
                         </Button>
@@ -247,7 +247,7 @@ const Mcq = () => {
                         <Button
                             onClick={handlePrev}
                             disabled={currentIndex === 0}
-                            className="flex-1 px-[29px] py-[20px] bg-[#CECECE] hover:bg-[#BDBDBD] text-[#1C3141] rounded-md text-size-16  font-semibold disabled:opacity-50 transition-all active:scale-95"
+                            className="flex-1 px-[29px] py-[20px] bg-[#CECECE] hover:bg-[#BDBDBD] text-[#1C3141] rounded-md text-size-16  disabled:opacity-50 transition-all active:scale-95"
                         >
                             Previous
                         </Button>
@@ -255,14 +255,14 @@ const Mcq = () => {
                         {currentIndex === questions.length - 1 ? (
                             <Button
                                 onClick={handleSubmit}
-                                className="flex-1 px-[29px] py-[20px] bg-[#1C3141] hover:bg-[#0F1C25] text-white rounded-md text-size-16  font-semibold transition-all active:scale-95"
+                                className="flex-1 px-[29px] py-[20px] bg-[#1C3141] hover:bg-[#0F1C25] text-white rounded-md text-size-16  transition-all active:scale-95"
                             > 
                                 Submit
                             </Button>
                         ) : (
                             <Button
                                 onClick={handleNext}
-                                className="flex-1 px-[29px] py-[20px] bg-[#1C3141] hover:bg-[#0F1C25] text-white rounded-md text-[17px] font-semibold transition-all active:scale-95"
+                                className="flex-1 px-[29px] py-[20px] bg-[#1C3141] hover:bg-[#0F1C25] text-white rounded-md text-[16px]  transition-all active:scale-95"
                             >
                                 Next
                             </Button>
