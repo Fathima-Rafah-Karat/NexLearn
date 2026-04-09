@@ -397,7 +397,7 @@ const Mcq = () => {
                     </DialogHeader>
                     
                     <div className="p-6 space-y-4">
-                        <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-[#E2E8F0] shadow-sm">
+                        <div className="flex items-center justify-between bg-white rounded-lg mb-[25px] ">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-[#1C3141] rounded-md">
                                     <Image src="/icon/clock.png" alt="clock" width={20} height={20} className="w-5 h-5 " />
@@ -407,7 +407,7 @@ const Mcq = () => {
                             <span className="text-[#1C3141] font-bold text-lg">{formatTime(submissionTime)}</span>
                         </div>
 
-                        <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-[#E2E8F0] shadow-sm">
+                        <div className="flex items-center justify-between  bg-white rounded-lg mb-[25px] ">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-[#F59E0B] rounded-md">
                                     <Image src="/icon/file.png" alt="file" width={20} height={20} className="w-5 h-5 " />
@@ -417,7 +417,7 @@ const Mcq = () => {
                             <span className="text-[#1C3141] font-bold text-lg">{questions.length.toString().padStart(3, '0')}</span>
                         </div>
 
-                        <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-[#E2E8F0] shadow-sm">
+                        <div className="flex items-center justify-between  bg-white rounded-lg mb-[25px] ">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-[#4CAF50] rounded-md">
                                     <CheckSquare className="w-5 h-5 text-white" />
@@ -427,12 +427,12 @@ const Mcq = () => {
                             <span className="text-[#1C3141] font-bold text-lg">{Object.keys(answers).length.toString().padStart(3, '0')}</span>
                         </div>
 
-                        <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-[#E2E8F0] shadow-sm">
+                        <div className="flex items-center justify-between  bg-white rounded-lg ">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-[#8B1E7F] rounded-md">
                                     <Bookmark className="w-5 h-5 text-white" />
                                 </div>
-                                <span className="text-[#1C3141] font-medium">Marked for review:</span>
+                                <span className="text-[#1C3141] text-size-16 font-medium">Marked for review:</span>
                             </div>
                             <span className="text-[#1C3141] font-bold text-lg">{Object.values(markedForReview).filter(Boolean).length.toString().padStart(3, '0')}</span>
                         </div>
