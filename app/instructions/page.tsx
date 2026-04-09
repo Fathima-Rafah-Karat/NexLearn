@@ -9,6 +9,19 @@ const Instructions = () => {
         { label: "Total time:", value: "90:00" },
     ];
 
+    const instructionList = [
+        "You have 100 minutes to complete the test.",
+        "Test consists of 100 multiple-choice q’s.",
+        "You are allowed 2 retest attempts if you do not pass on the first try.",
+        "Each incorrect answer will incur a negative mark of -1/4.",
+        "Ensure you are in a quiet environment and have a stable internet connection.",
+        "Keep an eye on the timer, and try to answer all questions within the given time.",
+        "Do not use any external resources such as dictionaries, websites, or assistance.",
+        "Complete the test honestly to accurately assess your proficiency level.",
+        "Check answers before submitting.",
+        "Your test results will be displayed immediately after submission, indicating whether you have passed or need to retake the test.",
+    ];
+
     return (
         <div className="min-h-screen bg-blue-50 px-4 md:px-0">
             <h1 className="text-color-text text-center pt-[20px] font-inter font-medium text-[22px] md:text-size-26 leading-tight md:leading-[37.44px]">Ancient Indian History MCQ </h1>
@@ -20,19 +33,14 @@ const Instructions = () => {
                     </div>
                 ))}
             </div>
-            <div className="mt-10 mx-auto max-w-[682px] text-[#5C5C5C] font-inter px-2 md:px-0">
+            <div className="mt-10 mx-auto max-w-[682px] text-[#5C5C5C] font-inter px-2 md:px-0 pb-10">
                 <h3 className="text-[16px] font-semibold leading-[1.54] mb-5 ">Instructions:</h3>
-                <ol className="list-decimal list-outside ml-7 text-[16px] font-normal leading-[1.72] tracking-[0px]">
-                    <li className="align-middle">You have 100 minutes to complete the test.</li>
-                    <li className="align-middle">Test consists of 100 multiple-choice q’s.</li>
-                    <li className="align-middle">You are allowed 2 retest attempts if you do not pass on the first try.</li>
-                    <li className="align-middle">Each incorrect answer will incur a negative mark of -1/4.</li>
-                    <li className="align-middle">Ensure you are in a quiet environment and have a stable internet connection.</li>
-                    <li className="align-middle">Keep an eye on the timer, and try to answer all questions within the given time.</li>
-                    <li className="align-middle">Do not use any external resources such as dictionaries, websites, or assistance.</li>
-                    <li className="align-middle">Complete the test honestly to accurately assess your proficiency level.</li>
-                    <li className="align-middle">Check answers before submitting.</li>
-                    <li className="align-middle leading-[1.54]">Your test results will be displayed immediately after submission, indicating whether you have passed or need to retake the test.</li>
+                <ol className="list-decimal list-outside ml-7 text-[16px] font-normal leading-[1.72] tracking-[0px] space-y-1">
+                    {instructionList.map((instruction, index) => (
+                        <li key={index} className="align-middle">
+                            {instruction}
+                        </li>
+                    ))}
                 </ol>
             </div>
             <Link href="/mcq">
