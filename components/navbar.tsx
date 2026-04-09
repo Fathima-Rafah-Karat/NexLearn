@@ -1,5 +1,5 @@
 "use client";
-import {useState} from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "./ui/button";
@@ -13,11 +13,11 @@ const Navbar = () => {
     if (noNavbarRoutes.includes(pathname)) {
         return null;
     }
-    const handleLogout =async ()=>{
+    const handleLogout = async () => {
         setIsLoggingOut(true);
-        try{
+        try {
             const token = localStorage.getItem("authToken");
-           const response = await fetch("https://nexlearn.noviindusdemosites.in/auth/logout", {
+            const response = await fetch("https://nexlearn.noviindusdemosites.in/auth/logout", {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${token}`
