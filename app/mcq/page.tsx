@@ -28,8 +28,6 @@ const Mcq = () => {
     const [isSubmitDialogOpen, setIsSubmitDialogOpen] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submissionTime, setSubmissionTime] = useState(0);
-    const [isResultDialogOpen, setIsResultDialogOpen] = useState(false);
-    const [resultData, setResultData] = useState(null);
 
     const questionsRef = useRef([]);
     const answersRef = useRef({});
@@ -147,7 +145,7 @@ const Mcq = () => {
 
             const result = await response.json();
             if (result.success) {
-                // Transform result for dialog display
+                // Transform result to match what ResultsPage expects
                 const timeTakenSecs = Math.max(0, totalTime - finalTime);
                 const transformedResult = {
                     score: result.score || 0,
@@ -157,9 +155,10 @@ const Mcq = () => {
                     skipped: result.not_attended || 0,
                     timeSpent: formatTime(timeTakenSecs),
                     remainingTime: formatTime(finalTime),
+                    userName: "Explorer" // Fallback name
                 };
-                setResultData(transformedResult);
-                setIsResultDialogOpen(true);
+                sessionStorage.setItem("lastResult", JSON.stringify(transformedResult));
+                router.push("/results");
             } else {
                 console.error("Submission failed:", result);
                 alert("Submission failed. Please try again.");
@@ -454,7 +453,8 @@ const Mcq = () => {
                                 "Submit Test"
                             )}
                         </Button>
-</Link>
+                        </Link>
+
                     </div>
                 </DialogContent>
             </Dialog>
