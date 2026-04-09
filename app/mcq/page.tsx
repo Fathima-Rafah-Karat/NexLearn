@@ -17,20 +17,20 @@ import { Label } from "@/components/ui/label";
 import { Clock, ChevronRight, Loader2, FileText, CheckSquare, Flag, Bookmark, X, XSquare, List } from "lucide-react";
 const Mcq = () => {
     const router = useRouter();
-    const [questions, setQuestions] = useState([]);
+    const [questions, setQuestions] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [answers, setAnswers] = useState({});
-    const [markedForReview, setMarkedForReview] = useState({});
-    const [visited, setVisited] = useState({ 0: true });
+    const [answers, setAnswers] = useState<Record<number, number>>({});
+    const [markedForReview, setMarkedForReview] = useState<Record<number, boolean>>({});
+    const [visited, setVisited] = useState<Record<number, boolean>>({ 0: true });
     const [timeLeft, setTimeLeft] = useState(100 * 60);
     const [totalTime, setTotalTime] = useState(100 * 60);
     const [isSubmitDialogOpen, setIsSubmitDialogOpen] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submissionTime, setSubmissionTime] = useState(0);
 
-    const questionsRef = useRef([]);
-    const answersRef = useRef({});
+    const questionsRef = useRef<any[]>([]);
+    const answersRef = useRef<Record<number, number>>({});
 
     useEffect(() => {
         questionsRef.current = questions;
@@ -83,13 +83,13 @@ const Mcq = () => {
         return () => clearInterval(timer);
     }, []); // Only run once on mount
 
-    const formatTime = (seconds) => {
+    const formatTime = (seconds: number) => {
         const mins = Math.floor(seconds / 60);
         const secs = seconds % 60;
         return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
     };
 
-    const handleOptionSelect = (optionIndex) => {
+    const handleOptionSelect = (optionIndex: number) => {
         setAnswers({ ...answers, [currentIndex]: optionIndex });
         setVisited({ ...visited, [currentIndex]: true });
     };
@@ -113,7 +113,7 @@ const Mcq = () => {
         }
     };
 
-    const handleJumpToQuestion = (index) => {
+    const handleJumpToQuestion = (index: number) => {
         setCurrentIndex(index);
         setVisited({ ...visited, [index]: true });
     };
@@ -123,7 +123,7 @@ const Mcq = () => {
         try {
             const token = localStorage.getItem("authToken") || "";
 
-            const answersPayload = currentQuestions.map((q, idx) => {
+            const answersPayload = currentQuestions.map((q: any, idx: number) => {
                 const selectedIdx = currentAnswers[idx];
                 const selectedOption = selectedIdx !== undefined ? q.options[selectedIdx] : null;
                 return {
@@ -145,7 +145,6 @@ const Mcq = () => {
 
             const result = await response.json();
             if (result.success) {
-                // Transform result to match what ResultsPage expects
                 const timeTakenSecs = Math.max(0, totalTime - finalTime);
                 const transformedResult = {
                     score: result.score || 0,
@@ -155,7 +154,7 @@ const Mcq = () => {
                     skipped: result.not_attended || 0,
                     timeSpent: formatTime(timeTakenSecs),
                     remainingTime: formatTime(finalTime),
-                    userName: "Explorer" // Fallback name
+                    userName: "Explorer"
                 };
                 sessionStorage.setItem("lastResult", JSON.stringify(transformedResult));
                 router.push("/results");
@@ -165,7 +164,7 @@ const Mcq = () => {
             }
         } catch (err) {
             console.error("Error submitting answers:", err);
-           
+
         } finally {
             setIsSubmitting(false);
             setIsSubmitDialogOpen(false);
@@ -183,7 +182,7 @@ const Mcq = () => {
     };
 
     const currentQuestion = questions[currentIndex];
-    const getQuestionStatus = (index) => {
+    const getQuestionStatus = (index: number) => {
         const isAnswered = answers[index] !== undefined;
         const isMarked = markedForReview[index];
         const isVisited = visited[index];
@@ -195,7 +194,7 @@ const Mcq = () => {
         return "unvisited";
     };
 
-    const getStatusColor = (status) => {
+    const getStatusColor = (status: string) => {
         switch (status) {
             case "answered": return "bg-[#4CAF50] text-white border border-transparent";
             case "visited": return "bg-[#F44336] text-white border border-transparent";
@@ -256,7 +255,7 @@ const Mcq = () => {
                                         <p>
                                             It was during this time that the varna system (social hierarchy) began to develop, which later evolved into the caste system. The Vedic Age also witnessed the rise of important kingdoms and the spread of agricultural practices across the region, significantly impacting the social and cultural fabric of ancient India.
                                         </p>
-                                       
+
                                     </div>
                                     <div className="mt-6 sm:mt-8 flex justify-end flex-shrink-0">
                                         <DialogClose asChild>
@@ -276,7 +275,7 @@ const Mcq = () => {
                         <div className="mb-8">
                             <RadioGroup
                                 value={answers[currentIndex] !== undefined ? String(answers[currentIndex]) : ""}
-                                onValueChange={(val) => handleOptionSelect(Number(val))}
+                                onValueChange={(val: string) => handleOptionSelect(Number(val))}
                                 className="grid gap-3"
                             >
                                 {currentQuestion.options.map((optObj, idx) => (
@@ -325,7 +324,7 @@ const Mcq = () => {
                             <Button
                                 onClick={handleSubmit}
                                 className="w-full sm:flex-1 px-4 sm:px-[29px] py-5 sm:py-[20px] bg-[#1C3141] hover:bg-[#0F1C25] text-white rounded-md text-[14px] sm:text-[16px] transition-all active:scale-95"
-                            > 
+                            >
                                 Submit
                             </Button>
                         ) : (
@@ -400,7 +399,7 @@ const Mcq = () => {
                             <span className="sr-only">Close</span>
                         </DialogClose>
                     </DialogHeader>
-                    
+
                     <div className="p-4 sm:p-6 space-y-4 overflow-y-auto">
                         <div className="flex items-center justify-between bg-white rounded-lg mb-[25px] ">
                             <div className="flex items-center gap-3">
@@ -425,7 +424,7 @@ const Mcq = () => {
                         <div className="flex items-center justify-between  bg-white rounded-lg mb-[25px] ">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-[#4CAF50] rounded-md">
-                                     <Image src="/icon/question.png" alt="file" width={20} height={20} className="w-5 h-5 " />
+                                    <Image src="/icon/question.png" alt="file" width={20} height={20} className="w-5 h-5 " />
                                 </div>
                                 <span className="text-[#1C3141] font-medium">Questions Answered:</span>
                             </div>
@@ -441,18 +440,18 @@ const Mcq = () => {
                             </div>
                             <span className="text-[#1C3141] font-bold text-lg">{Object.values(markedForReview).filter(Boolean).length.toString().padStart(3, '0')}</span>
                         </div>
-<Link href="/results">
-                        <Button 
-                            onClick={() => submitAnswers(questions, answers, submissionTime)}
-                            disabled={isSubmitting}
-                            className="w-full py-6 bg-[#1C3141] hover:bg-[#0F1C25] text-white rounded-xl text-lg font-semibold mt-4 shadow-lg active:scale-[0.98] transition-all"
-                        >
-                            {isSubmitting ? (
-                                <Loader2 className="w-6 h-6 animate-spin" />
-                            ) : (
-                                "Submit Test"
-                            )}
-                        </Button>
+                        <Link href="/results">
+                            <Button
+                                onClick={() => submitAnswers(questions, answers, submissionTime)}
+                                disabled={isSubmitting}
+                                className="w-full py-6 bg-[#1C3141] hover:bg-[#0F1C25] text-white rounded-xl text-lg font-semibold mt-4 shadow-lg active:scale-[0.98] transition-all"
+                            >
+                                {isSubmitting ? (
+                                    <Loader2 className="w-6 h-6 animate-spin" />
+                                ) : (
+                                    "Submit Test"
+                                )}
+                            </Button>
                         </Link>
 
                     </div>
