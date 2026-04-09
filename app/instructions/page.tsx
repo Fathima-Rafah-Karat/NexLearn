@@ -44,9 +44,9 @@ const Instructions = () => {
                 </ol>
             </div>
             <Link href="/mcq">
-            <Button className="text-bg-white bg-color-text font-inter rounded-[10px] flex mx-auto mt-[22px] py-[24px] px-[124px] text-[16px] font-semibold leading-[16.88px]">
-                Start Test
-            </Button>
+                <Button className="text-bg-white bg-color-text font-inter rounded-[10px] flex mx-auto mt-[22px] py-[24px] px-[124px] text-[16px] font-semibold leading-[16.88px]">
+                    Start Test
+                </Button>
             </Link>
 
         </div>
