@@ -275,7 +275,7 @@ const Mcq = () => {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-10 gap-x-2 gap-y-4  mb-8 overflow-y-auto scrollbar-hide pr-1 pt-3 pl-3">
+                        <div className="grid grid-cols-10 gap-x-2 gap-y-4  mb-8 overflow-y-auto scrollbar-hide pr-1 pt-3 pl-3 pb-3">
                             {questions.map((_, idx) => (
                                 <button
                                     key={idx}
