@@ -245,11 +245,11 @@ const Mcq = () => {
                                         <Image src="/icon/Polygon.png" alt="arrow" width={13} height={4} className=" h-3 w-3 ml-1" />
                                     </Button>
                                 </DialogTrigger>
-                                <DialogContent showClose={false} className="max-w-[1200px] w-[95vw] bg-white border-[#E2E8F0] p-6 md:p-10 rounded-[10px] gap-0">
-                                    <DialogHeader className="border-b border-[#E2E8F0] pb-4 mb-6 relative">
-                                        <DialogTitle className="text-[#1C3141] text-[16px] font-semibold text-left">Comprehensive Paragraph</DialogTitle>
+                                <DialogContent showClose={false} className="w-[calc(100vw-1rem)] sm:w-[95vw] max-w-[1200px] max-h-[90vh] bg-white border-[#E2E8F0] p-4 sm:p-6 md:p-10 rounded-[10px] gap-0 overflow-hidden flex flex-col">
+                                    <DialogHeader className="border-b border-[#E2E8F0] pb-4 mb-4 sm:mb-6 relative flex-shrink-0">
+                                        <DialogTitle className="text-[#1C3141] text-[15px] sm:text-[16px] font-semibold text-left">Comprehensive Paragraph</DialogTitle>
                                     </DialogHeader>
-                                    <div className="text-[#1C3141] text-[18px] font-medium leading-[1.65] max-h-[60vh] overflow-y-auto pr-2 flex flex-col gap-5">
+                                    <div className="text-[#1C3141] text-[14px] sm:text-[16px] md:text-[18px] font-medium leading-[1.65] max-h-[60vh] sm:max-h-[65vh] overflow-y-auto pr-1 sm:pr-2 flex flex-col gap-4 sm:gap-5">
                                         <p>
                                             Ancient Indian history spans several millennia and offers a profound glimpse into the origins of one of the world&apos;s oldest and most diverse civilizations. It begins with the Indus Valley Civilization (c. 2500–1500 BCE), which is renowned for its advanced urban planning, architecture, and water management systems. Cities like Harappa and Mohenjo-Daro were highly developed, with sophisticated drainage systems and well-organized streets, showcasing the early brilliance of Indian civilization. The decline of this civilization remains a mystery, but it marks the transition to the next significant phase in Indian history. Following the Indus Valley Civilization, the Vedic Period (c. 1500–600 BCE) saw the arrival of the Aryans in northern India. This period is characterized by the composition of the Vedas, which laid the foundations of Hinduism and early Indian society.
                                         </p>
@@ -258,9 +258,9 @@ const Mcq = () => {
                                         </p>
                                        
                                     </div>
-                                    <div className="mt-8 flex justify-end">
+                                    <div className="mt-6 sm:mt-8 flex justify-end flex-shrink-0">
                                         <DialogClose asChild>
-                                            <Button className="bg-[#1C3141] hover:bg-[#0F1C25] text-white px-10 py-5 rounded-[8px] font-medium text-[15px] transition-all">
+                                            <Button className="bg-[#1C3141] hover:bg-[#0F1C25] text-white w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-5 rounded-[8px] font-medium text-[14px] sm:text-[15px] transition-all">
                                                 Minimize
                                             </Button>
                                         </DialogClose>
@@ -390,9 +390,9 @@ const Mcq = () => {
             </div>
 
             <Dialog open={isSubmitDialogOpen} onOpenChange={setIsSubmitDialogOpen}>
-                <DialogContent showClose={false} className="sm:max-w-[450px] p-0 overflow-hidden border-none rounded-2xl">
-                    <DialogHeader className="px-6 pt-6 pb-4 flex flex-row items-center justify-between border-b">
-                        <DialogTitle className="text-[#1C3141] text-lg font-semibold">
+                <DialogContent showClose={false} className="w-[calc(100vw-1rem)] sm:max-w-[450px] p-0 overflow-hidden border-none rounded-2xl max-h-[90vh] flex flex-col">
+                    <DialogHeader className="px-4 sm:px-6 pt-4 sm:pt-6 pb-4 flex flex-row items-center justify-between border-b flex-shrink-0">
+                        <DialogTitle className="text-[#1C3141] text-base sm:text-lg font-semibold pr-3">
                             Are you sure you want to submit the test?
                         </DialogTitle>
                         <DialogClose className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
@@ -401,7 +401,7 @@ const Mcq = () => {
                         </DialogClose>
                     </DialogHeader>
                     
-                    <div className="p-6 space-y-4">
+                    <div className="p-4 sm:p-6 space-y-4 overflow-y-auto">
                         <div className="flex items-center justify-between bg-white rounded-lg mb-[25px] ">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-[#1C3141] rounded-md">
