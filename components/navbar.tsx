@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import {useState} from "react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "./ui/button";
@@ -7,13 +7,14 @@ import { Button } from "./ui/button";
 const Navbar = () => {
     const pathname = usePathname();
     const router = useRouter();
+    const [isLoggingOut, setIsLoggingOut] = useState(false);
     const noNavbarRoutes = ["/", "/otp-verification", "/add-details"];
 
     if (noNavbarRoutes.includes(pathname)) {
         return null;
     }
-
     const handleLogout =async ()=>{
+        setIsLoggingOut(true);
         try{
             const token = localStorage.getItem("authToken");
            const response = await fetch("https://nexlearn.noviindusdemosites.in/auth/logout", {
@@ -22,14 +23,16 @@ const Navbar = () => {
                     "Authorization": `Bearer ${token}`
                 }
             });
-        }
-        catch (error) {
-            console.error("Logout error:", error);
             localStorage.clear();
             router.push("/");
         }
+        catch (error) {
+            console.error("Logout error:", error);
+        }
+        finally {
+            setIsLoggingOut(false);
+        }
     };
-
     return (
         <nav className="bg-white flex items-center justify-between px-[20px] md:px-[80px] py-[15px] relative border-b-[1.43px] border-[#E9EBEC]">
             <div className="hidden md:block w-[100px]"></div>
@@ -45,7 +48,7 @@ const Navbar = () => {
                 </div>
             </div>
             <div className="flex items-center ">
-                <Button className=" px-[16px] py-[7px] rounded-[6px] text-white font-inter text-[13px]  bg-[#177A9C] font-medium font-semibold text-bg-white  transition-all cursor-pointer">
+                <Button onClick={handleLogout} disabled={isLoggingOut} className=" px-[16px] py-[7px] rounded-[6px] text-white font-inter text-[13px]  bg-[#177A9C] font-medium font-semibold text-bg-white  transition-all cursor-pointer">
                     Logout
                 </Button>
             </div>
