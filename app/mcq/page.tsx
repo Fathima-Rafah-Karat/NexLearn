@@ -379,7 +379,7 @@ const Mcq = () => {
                         <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-[#E2E8F0] shadow-sm">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-[#1C3141] rounded-md">
-                                    <Clock className="w-5 h-5 text-white" />
+                                    <Image src="/icon/clock.png" alt="clock" width={5} height={5} className="w-5 h-5 " />
                                 </div>
                                 <span className="text-[#1C3141] font-medium">Remaining Time:</span>
                             </div>
