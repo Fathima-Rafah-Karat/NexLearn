@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -23,8 +23,21 @@ const Mcq = () => {
     const [markedForReview, setMarkedForReview] = useState({});
     const [visited, setVisited] = useState({ 0: true });
     const [timeLeft, setTimeLeft] = useState(100 * 60);
+    const [totalTime, setTotalTime] = useState(100 * 60);
     const [isSubmitDialogOpen, setIsSubmitDialogOpen] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submissionTime, setSubmissionTime] = useState(0);
+
+    const questionsRef = useRef([]);
+    const answersRef = useRef({});
+
+    useEffect(() => {
+        questionsRef.current = questions;
+    }, [questions]);
+
+    useEffect(() => {
+        answersRef.current = answers;
+    }, [answers]);
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -41,7 +54,9 @@ const Mcq = () => {
                 if (data.success && data.questions) {
                     setQuestions(data.questions);
                     if (data.total_time) {
-                        setTimeLeft(data.total_time * 60);
+                        const totalSecs = data.total_time * 60;
+                        setTimeLeft(totalSecs);
+                        setTotalTime(totalSecs);
                     }
                 }
             } catch (err) {
@@ -54,15 +69,18 @@ const Mcq = () => {
     }, []);
 
     useEffect(() => {
-        if (timeLeft <= 0) {
-            handleAutoSubmit();
-            return;
-        }
         const timer = setInterval(() => {
-            setTimeLeft((prev) => prev - 1);
+            setTimeLeft((prev) => {
+                if (prev <= 0) {
+                    clearInterval(timer);
+                    handleAutoSubmit();
+                    return 0;
+                }
+                return prev - 1;
+            });
         }, 1000);
         return () => clearInterval(timer);
-    }, [timeLeft]);
+    }, []); // Only run once on mount
 
     const formatTime = (seconds) => {
         const mins = Math.floor(seconds / 60);
@@ -99,13 +117,13 @@ const Mcq = () => {
         setVisited({ ...visited, [index]: true });
     };
 
-    const submitAnswers = async () => {
+    const submitAnswers = async (currentQuestions = questions, currentAnswers = answers, finalTime = timeLeft) => {
         setIsSubmitting(true);
         try {
             const token = localStorage.getItem("authToken") || "";
 
-            const answersPayload = questions.map((q, idx) => {
-                const selectedIdx = answers[idx];
+            const answersPayload = currentQuestions.map((q, idx) => {
+                const selectedIdx = currentAnswers[idx];
                 const selectedOption = selectedIdx !== undefined ? q.options[selectedIdx] : null;
                 return {
                     question_id: q.id,
@@ -127,13 +145,15 @@ const Mcq = () => {
             const result = await response.json();
             if (result.success) {
                 // Transform result to match what ResultsPage expects
+                const timeTakenSecs = Math.max(0, totalTime - finalTime);
                 const transformedResult = {
                     score: result.score || 0,
-                    total: questions.length,
+                    total: currentQuestions.length,
                     correct: result.correct || 0,
                     incorrect: result.wrong || 0,
                     skipped: result.not_attended || 0,
-                    timeSpent: result.submitted_at || "00:00",
+                    timeSpent: formatTime(timeTakenSecs),
+                    remainingTime: formatTime(finalTime),
                     userName: "Explorer" // Fallback name
                 };
                 sessionStorage.setItem("lastResult", JSON.stringify(transformedResult));
@@ -153,10 +173,11 @@ const Mcq = () => {
 
     const handleAutoSubmit = async () => {
         alert("Time is up! Your test is being submitted.");
-        await submitAnswers();
+        await submitAnswers(questionsRef.current, answersRef.current, 0);
     };
 
     const handleSubmit = () => {
+        setSubmissionTime(timeLeft);
         setIsSubmitDialogOpen(true);
     };
 
@@ -379,17 +400,17 @@ const Mcq = () => {
                         <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-[#E2E8F0] shadow-sm">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-[#1C3141] rounded-md">
-                                    <Image src="/icon/clock.png" alt="clock" width={5} height={5} className="w-5 h-5 " />
+                                    <Image src="/icon/clock.png" alt="clock" width={20} height={20} className="w-5 h-5 " />
                                 </div>
                                 <span className="text-[#1C3141] font-medium">Remaining Time:</span>
                             </div>
-                            <span className="text-[#1C3141] font-bold text-lg">{formatTime(timeLeft)}</span>
+                            <span className="text-[#1C3141] font-bold text-lg">{formatTime(submissionTime)}</span>
                         </div>
 
                         <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-[#E2E8F0] shadow-sm">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-[#F59E0B] rounded-md">
-                                    <FileText className="w-5 h-5 text-white" />
+                                    <Image src="/icon/file.png" alt="file" width={20} height={20} className="w-5 h-5 " />
                                 </div>
                                 <span className="text-[#1C3141] font-medium">Total Questions:</span>
                             </div>
@@ -417,7 +438,7 @@ const Mcq = () => {
                         </div>
 
                         <Button 
-                            onClick={submitAnswers}
+                            onClick={() => submitAnswers(questions, answers, submissionTime)}
                             disabled={isSubmitting}
                             className="w-full py-6 bg-[#1C3141] hover:bg-[#0F1C25] text-white rounded-xl text-lg font-semibold mt-4 shadow-lg active:scale-[0.98] transition-all"
                         >
