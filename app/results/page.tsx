@@ -8,7 +8,16 @@ import { CheckSquare, XSquare, FileText, List, LayoutDashboard } from "lucide-re
 
 const ResultsPage = () => {
     const router = useRouter();
-    const [result, setResult] = useState(null);
+    type ResultData = {
+        score: number;
+        total: number;
+        correct: number;
+        incorrect: number;
+        skipped: number;
+        userName: string;
+    };
+
+    const [result, setResult] = useState<ResultData | null>(null);
 
     useEffect(() => {
         const storedResult = sessionStorage.getItem("lastResult");
