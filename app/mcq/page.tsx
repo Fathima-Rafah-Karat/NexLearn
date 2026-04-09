@@ -278,7 +278,7 @@ const Mcq = () => {
                                 onValueChange={(val: string) => handleOptionSelect(Number(val))}
                                 className="grid gap-3"
                             >
-                                {currentQuestion.options.map((optObj, idx) => (
+                                {currentQuestion.options.map((optObj: { option: string }, idx: number) => (
                                     <div
                                         key={idx}
                                         onClick={() => handleOptionSelect(idx)}
