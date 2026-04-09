@@ -305,10 +305,10 @@ const Mcq = () => {
                         </div>
                     </div>
 
-                    <div className="bg-[#F0F4F8] p-4 flex gap-[11px] items-center justify-between">
+                    <div className="bg-[#F0F4F8] p-4 flex flex-col sm:flex-row gap-3 sm:gap-[11px] items-center justify-between">
                         <Button
                             onClick={handleMarkForReview}
-                            className="flex-1 px-[29px] py-[20px] bg-[#800080] hover:bg-[#701867] text-[#FFFFFF] rounded-md text-[16px]  transition-all active:scale-95"
+                            className="w-full sm:flex-1 px-4 sm:px-[29px] py-5 sm:py-[20px] bg-[#800080] hover:bg-[#701867] text-[#FFFFFF] rounded-md text-[14px] sm:text-[16px] transition-all active:scale-95"
                         >
                             Mark for review
                         </Button>
@@ -316,7 +316,7 @@ const Mcq = () => {
                         <Button
                             onClick={handlePrev}
                             disabled={currentIndex === 0}
-                            className="flex-1 px-[29px] py-[20px] bg-[#CECECE] hover:bg-[#BDBDBD] text-[#1C3141] rounded-md text-size-16  disabled:opacity-50 transition-all active:scale-95"
+                            className="w-full sm:flex-1 px-4 sm:px-[29px] py-5 sm:py-[20px] bg-[#CECECE] hover:bg-[#BDBDBD] text-[#1C3141] rounded-md text-[14px] sm:text-[16px] disabled:opacity-50 transition-all active:scale-95"
                         >
                             Previous
                         </Button>
@@ -324,14 +324,14 @@ const Mcq = () => {
                         {currentIndex === questions.length - 1 ? (
                             <Button
                                 onClick={handleSubmit}
-                                className="flex-1 px-[29px] py-[20px] bg-[#1C3141] hover:bg-[#0F1C25] text-white rounded-md text-size-16  transition-all active:scale-95"
+                                className="w-full sm:flex-1 px-4 sm:px-[29px] py-5 sm:py-[20px] bg-[#1C3141] hover:bg-[#0F1C25] text-white rounded-md text-[14px] sm:text-[16px] transition-all active:scale-95"
                             > 
                                 Submit
                             </Button>
                         ) : (
                             <Button
                                 onClick={handleNext}
-                                className="flex-1 px-[29px] py-[20px] bg-[#1C3141] hover:bg-[#0F1C25] text-white rounded-md text-[16px]  transition-all active:scale-95"
+                                className="w-full sm:flex-1 px-4 sm:px-[29px] py-5 sm:py-[20px] bg-[#1C3141] hover:bg-[#0F1C25] text-white rounded-md text-[14px] sm:text-[16px] transition-all active:scale-95"
                             >
                                 Next
                             </Button>
@@ -367,7 +367,7 @@ const Mcq = () => {
                         </div>
 
                         <div className="mt-auto pt-8 ">
-                            <div className="flex xl:flex-row flex-col gap-y-5 gap-x-5">
+                            <div className="flex xl:flex-row flex-col  gap-y-5 gap-x-5">
                                 <div className="flex items-center gap-3 text-[13px] font-medium text-[#1C3141] font-inter">
                                     <div className="w-6 h-6 bg-[#4CAF50] rounded-sm" /> Attended
                                 </div>
