@@ -33,7 +33,7 @@ const Instructions = () => {
                     </div>
                 ))}
             </div>
-            <div className="mt-10 mx-auto max-w-[682px] text-[#5C5C5C] font-inter px-2 md:px-0 pb-10">
+            <div className="mt-10 mx-auto max-w-[682px] text-[#5C5C5C] font-inter px-2 ">
                 <h3 className="text-[16px] font-semibold leading-[1.54] mb-5 ">Instructions:</h3>
                 <ol className="list-decimal list-outside ml-7 text-[16px] font-normal leading-[1.72] tracking-[0px] space-y-1">
                     {instructionList.map((instruction, index) => (
