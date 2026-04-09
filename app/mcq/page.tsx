@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { Clock, ChevronRight, Loader2, FileText, CheckSquare, Flag, Bookmark } from "lucide-react";
+import { Clock, ChevronRight, Loader2, FileText, CheckSquare, Flag, Bookmark, X } from "lucide-react";
 const Mcq = () => {
     const router = useRouter();
     const [questions, setQuestions] = useState([]);
@@ -244,7 +244,7 @@ const Mcq = () => {
                                         <Image src="/icon/Polygon.png" alt="arrow" width={13} height={4} className=" h-3 w-3 ml-1" />
                                     </Button>
                                 </DialogTrigger>
-                                <DialogContent className="max-w-[1200px] w-[95vw] bg-white border-[#E2E8F0] p-6 md:p-10 rounded-[10px] gap-0">
+                                <DialogContent showClose={false} className="max-w-[1200px] w-[95vw] bg-white border-[#E2E8F0] p-6 md:p-10 rounded-[10px] gap-0">
                                     <DialogHeader className="border-b border-[#E2E8F0] pb-4 mb-6 relative">
                                         <DialogTitle className="text-[#1C3141] text-[16px] font-semibold text-left">Comprehensive Paragraph</DialogTitle>
                                     </DialogHeader>
@@ -389,11 +389,15 @@ const Mcq = () => {
             </div>
 
             <Dialog open={isSubmitDialogOpen} onOpenChange={setIsSubmitDialogOpen}>
-                <DialogContent className="sm:max-w-[425px] p-0 overflow-hidden border-none rounded-2xl">
+                <DialogContent showClose={false} className="sm:max-w-[450px] p-0 overflow-hidden border-none rounded-2xl">
                     <DialogHeader className="px-6 pt-6 pb-4 flex flex-row items-center justify-between border-b">
                         <DialogTitle className="text-[#1C3141] text-lg font-semibold">
                             Are you sure you want to submit the test?
                         </DialogTitle>
+                        <DialogClose className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+                            <X className="h-5 w-5 text-[#1C3141]" />
+                            <span className="sr-only">Close</span>
+                        </DialogClose>
                     </DialogHeader>
                     
                     <div className="p-6 space-y-4">
