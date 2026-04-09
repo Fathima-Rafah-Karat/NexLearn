@@ -390,12 +390,12 @@ const Mcq = () => {
             </div>
 
             <Dialog open={isSubmitDialogOpen} onOpenChange={setIsSubmitDialogOpen}>
-                <DialogContent showClose={false} className="w-[calc(100vw-1rem)] sm:max-w-[450px] p-0 overflow-hidden border-none rounded-2xl max-h-[90vh] flex flex-col">
+                <DialogContent showCloseButton={false} className="w-[calc(100vw-1rem)] sm:max-w-[450px] p-0 overflow-hidden  max-h-[90vh] flex flex-col">
                     <DialogHeader className="px-4 sm:px-6 pt-4 sm:pt-6 pb-4 flex flex-row items-center justify-between border-b flex-shrink-0">
                         <DialogTitle className="text-[#1C3141] text-base sm:text-lg font-semibold pr-3">
                             Are you sure you want to submit the test?
                         </DialogTitle>
-                        <DialogClose className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+                        <DialogClose className="opacity-70 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none">
                             <X className="h-5 w-5 text-[#1C3141]" />
                             <span className="sr-only">Close</span>
                         </DialogClose>
