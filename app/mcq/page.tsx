@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import {
     Dialog,
     DialogContent,
@@ -164,7 +165,7 @@ const Mcq = () => {
             }
         } catch (err) {
             console.error("Error submitting answers:", err);
-            alert("An error occurred during submission.");
+           
         } finally {
             setIsSubmitting(false);
             setIsSubmitDialogOpen(false);
@@ -440,7 +441,7 @@ const Mcq = () => {
                             </div>
                             <span className="text-[#1C3141] font-bold text-lg">{Object.values(markedForReview).filter(Boolean).length.toString().padStart(3, '0')}</span>
                         </div>
-
+<Link href="/results">
                         <Button 
                             onClick={() => submitAnswers(questions, answers, submissionTime)}
                             disabled={isSubmitting}
@@ -452,6 +453,7 @@ const Mcq = () => {
                                 "Submit Test"
                             )}
                         </Button>
+</Link>
                     </div>
                 </DialogContent>
             </Dialog>
