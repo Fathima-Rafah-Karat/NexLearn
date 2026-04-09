@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { Clock, ChevronRight, Loader2 } from "lucide-react";
+import { Clock, ChevronRight, Loader2, FileText, CheckSquare, Flag, Bookmark } from "lucide-react";
 const Mcq = () => {
     const router = useRouter();
     const [questions, setQuestions] = useState([]);
@@ -23,6 +23,8 @@ const Mcq = () => {
     const [markedForReview, setMarkedForReview] = useState({});
     const [visited, setVisited] = useState({ 0: true });
     const [timeLeft, setTimeLeft] = useState(100 * 60);
+    const [isSubmitDialogOpen, setIsSubmitDialogOpen] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -97,16 +99,65 @@ const Mcq = () => {
         setVisited({ ...visited, [index]: true });
     };
 
-    const handleAutoSubmit = () => {
-        alert("Time is up! Your test has been submitted.");
-        router.push("/results");
+    const submitAnswers = async () => {
+        setIsSubmitting(true);
+        try {
+            const token = localStorage.getItem("authToken") || "";
+
+            const answersPayload = questions.map((q, idx) => {
+                const selectedIdx = answers[idx];
+                const selectedOption = selectedIdx !== undefined ? q.options[selectedIdx] : null;
+                return {
+                    question_id: q.id,
+                    selected_option_id: selectedOption ? selectedOption.id : null
+                };
+            });
+
+            const formData = new FormData();
+            formData.append("answers", JSON.stringify(answersPayload));
+
+            const response = await fetch("https://nexlearn.noviindusdemosites.in/answers/submit", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                },
+                body: formData
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                // Transform result to match what ResultsPage expects
+                const transformedResult = {
+                    score: result.score || 0,
+                    total: questions.length,
+                    correct: result.correct || 0,
+                    incorrect: result.wrong || 0,
+                    skipped: result.not_attended || 0,
+                    timeSpent: result.submitted_at || "00:00",
+                    userName: "Explorer" // Fallback name
+                };
+                sessionStorage.setItem("lastResult", JSON.stringify(transformedResult));
+                router.push("/results");
+            } else {
+                console.error("Submission failed:", result);
+                alert("Submission failed. Please try again.");
+            }
+        } catch (err) {
+            console.error("Error submitting answers:", err);
+            alert("An error occurred during submission.");
+        } finally {
+            setIsSubmitting(false);
+            setIsSubmitDialogOpen(false);
+        }
+    };
+
+    const handleAutoSubmit = async () => {
+        alert("Time is up! Your test is being submitted.");
+        await submitAnswers();
     };
 
     const handleSubmit = () => {
-        const confirmed = window.confirm("Are you sure you want to submit your test?");
-        if (confirmed) {
-            router.push("/results");
-        }
+        setIsSubmitDialogOpen(true);
     };
 
     const currentQuestion = questions[currentIndex];
@@ -315,6 +366,70 @@ const Mcq = () => {
                 </div>
 
             </div>
+
+            <Dialog open={isSubmitDialogOpen} onOpenChange={setIsSubmitDialogOpen}>
+                <DialogContent className="sm:max-w-[425px] p-0 overflow-hidden border-none rounded-2xl">
+                    <DialogHeader className="px-6 pt-6 pb-4 flex flex-row items-center justify-between border-b">
+                        <DialogTitle className="text-[#1C3141] text-lg font-semibold">
+                            Are you sure you want to submit the test?
+                        </DialogTitle>
+                    </DialogHeader>
+                    
+                    <div className="p-6 space-y-4">
+                        <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-[#E2E8F0] shadow-sm">
+                            <div className="flex items-center gap-3">
+                                <div className="p-2 bg-[#1C3141] rounded-md">
+                                    <Clock className="w-5 h-5 text-white" />
+                                </div>
+                                <span className="text-[#1C3141] font-medium">Remaining Time:</span>
+                            </div>
+                            <span className="text-[#1C3141] font-bold text-lg">{formatTime(timeLeft)}</span>
+                        </div>
+
+                        <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-[#E2E8F0] shadow-sm">
+                            <div className="flex items-center gap-3">
+                                <div className="p-2 bg-[#F59E0B] rounded-md">
+                                    <FileText className="w-5 h-5 text-white" />
+                                </div>
+                                <span className="text-[#1C3141] font-medium">Total Questions:</span>
+                            </div>
+                            <span className="text-[#1C3141] font-bold text-lg">{questions.length.toString().padStart(3, '0')}</span>
+                        </div>
+
+                        <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-[#E2E8F0] shadow-sm">
+                            <div className="flex items-center gap-3">
+                                <div className="p-2 bg-[#4CAF50] rounded-md">
+                                    <CheckSquare className="w-5 h-5 text-white" />
+                                </div>
+                                <span className="text-[#1C3141] font-medium">Questions Answered:</span>
+                            </div>
+                            <span className="text-[#1C3141] font-bold text-lg">{Object.keys(answers).length.toString().padStart(3, '0')}</span>
+                        </div>
+
+                        <div className="flex items-center justify-between p-4 bg-white rounded-lg border border-[#E2E8F0] shadow-sm">
+                            <div className="flex items-center gap-3">
+                                <div className="p-2 bg-[#8B1E7F] rounded-md">
+                                    <Bookmark className="w-5 h-5 text-white" />
+                                </div>
+                                <span className="text-[#1C3141] font-medium">Marked for review:</span>
+                            </div>
+                            <span className="text-[#1C3141] font-bold text-lg">{Object.values(markedForReview).filter(Boolean).length.toString().padStart(3, '0')}</span>
+                        </div>
+
+                        <Button 
+                            onClick={submitAnswers}
+                            disabled={isSubmitting}
+                            className="w-full py-6 bg-[#1C3141] hover:bg-[#0F1C25] text-white rounded-xl text-lg font-semibold mt-4 shadow-lg active:scale-[0.98] transition-all"
+                        >
+                            {isSubmitting ? (
+                                <Loader2 className="w-6 h-6 animate-spin" />
+                            ) : (
+                                "Submit Test"
+                            )}
+                        </Button>
+                    </div>
+                </DialogContent>
+            </Dialog>
         </div>
     );
 };
