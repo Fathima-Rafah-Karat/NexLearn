@@ -27,7 +27,7 @@ const Navbar = () => {
                 </div>
             </div>
             <div className="flex items-center ">
-                <Button className=" px-[16px] py-[7px] rounded-[6px] text-white font-inter text-[13px]  bg-[#177A9C] font-medium font-semibold text-color-text  transition-all cursor-pointer">
+                <Button className=" px-[16px] py-[7px] rounded-[6px] text-white font-inter text-[13px]  bg-[#177A9C] font-medium font-semibold text-bg-white  transition-all cursor-pointer">
                     Logout
                 </Button>
             </div>
