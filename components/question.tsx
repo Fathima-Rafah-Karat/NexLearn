@@ -15,7 +15,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Clock,  Loader2, X } from "lucide-react";
 import Link from "next/link";
-import { SUBMIT } from "./constants/api";
+import { LIST, SUBMIT } from "./constants/api";
 
 const Question =()=>{
    const router = useRouter();
@@ -46,7 +46,7 @@ const Question =()=>{
         const fetchQuestions = async () => {
             try {
                 const token = localStorage.getItem("authToken") || "";
-                const response = await fetch("https://nexlearn.noviindusdemosites.in/question/list", {
+                const response = await fetch(LIST, {
                     method: "GET",
                     headers: {
                         "Authorization": `Bearer ${token}`,
