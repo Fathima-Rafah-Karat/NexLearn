@@ -81,7 +81,7 @@ const Mcq = () => {
             });
         }, 1000);
         return () => clearInterval(timer);
-    }, []); // Only run once on mount
+    }, []); 
 
     const formatTime = (seconds: number) => {
         const mins = Math.floor(seconds / 60);
@@ -396,7 +396,6 @@ const Mcq = () => {
                         </DialogTitle>
                         <DialogClose className="opacity-70 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none">
                             <X className="h-5 w-5 text-[#1C3141]" />
-                            <span className="sr-only">Close</span>
                         </DialogClose>
                     </DialogHeader>
 
