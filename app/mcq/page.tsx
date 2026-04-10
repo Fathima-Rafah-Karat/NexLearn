@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { Clock,Loader2 } from "lucide-react";
+import { Clock,  Loader2, X } from "lucide-react";
 const Mcq = () => {
     const router = useRouter();
     const [questions, setQuestions] = useState<any[]>([]);
