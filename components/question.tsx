@@ -15,6 +15,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Clock,  Loader2, X } from "lucide-react";
 import Link from "next/link";
+import { SUBMIT } from "./constants/api";
 
 const Question =()=>{
    const router = useRouter();
@@ -136,7 +137,7 @@ const Question =()=>{
             const formData = new FormData();
             formData.append("answers", JSON.stringify(answersPayload));
 
-            const response = await fetch("https://nexlearn.noviindusdemosites.in/answers/submit", {
+            const response = await fetch(SUBMIT, {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${token}`
