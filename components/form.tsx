@@ -5,6 +5,7 @@ import { Loader2, X, Camera, Info } from "lucide-react";
 import { Input } from "./ui/input";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { CREATE_PROFILE } from "./constants/api";
 
 const Form =()=>{
       const router = useRouter();
@@ -56,7 +57,7 @@ const Form =()=>{
             formData.append("mobile", phone);
             formData.append("profile_image", image);
 
-            const response = await fetch("https://nexlearn.noviindusdemosites.in/auth/create-profile", {
+            const response = await fetch(CREATE_PROFILE, {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${token}`
