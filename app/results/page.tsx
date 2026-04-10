@@ -63,7 +63,7 @@ const ResultsPage = () => {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
                             <div className="w-11 h-11 bg-[#D4A017] rounded-md flex items-center justify-center">
-                                <FileText className="w-6 h-6 text-white" />
+                                <Image src="/icon/question.png" alt="file" width={20} height={20} className="w-5 h-5 " />
                             </div>
                             <span className="text-[#1C3141] text-[17px] font-semibold">Total Questions:</span>
                         </div>
@@ -73,7 +73,7 @@ const ResultsPage = () => {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
                             <div className="w-11 h-11 bg-[#4CAF50] rounded-md flex items-center justify-center">
-                                <CheckSquare className="w-6 h-6 text-white" />
+                                  <Image src="/icon/correct.png" alt="file" width={20} height={20} className="w-5 h-5 " />
                             </div>
                             <span className="text-[#1C3141] text-[17px] font-semibold">Correct Answers:</span>
                         </div>
@@ -83,7 +83,7 @@ const ResultsPage = () => {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
                             <div className="w-11 h-11 bg-[#F44336] rounded-md flex items-center justify-center">
-                                <XSquare className="w-6 h-6 text-white" />
+                                  <Image src="/icon/wrong.png" alt="file" width={20} height={20} className="w-5 h-5 " />
                             </div>
                             <span className="text-[#1C3141] text-[17px] font-semibold">Incorrect Answers:</span>
                         </div>
@@ -93,7 +93,7 @@ const ResultsPage = () => {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
                             <div className="w-11 h-11 bg-[#5C5C5C] rounded-md flex items-center justify-center">
-                                <List className="w-6 h-6 text-white" />
+                                  <Image src="/icon/question.png" alt="file" width={20} height={20} className="w-5 h-5 " />
                             </div>
                             <span className="text-[#1C3141] text-[17px] font-semibold">Not Attended Questions:</span>
                         </div>
