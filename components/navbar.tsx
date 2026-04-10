@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "./ui/button";
+import { LOGOUT } from "./constants/api";
 
 const Navbar = () => {
     const pathname = usePathname();
@@ -17,7 +18,7 @@ const Navbar = () => {
         setIsLoggingOut(true);
         try {
             const token = localStorage.getItem("authToken");
-            const response = await fetch("https://nexlearn.noviindusdemosites.in/auth/logout", {
+            const response = await fetch(LOGOUT, {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${token}`
