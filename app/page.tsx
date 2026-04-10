@@ -1,5 +1,5 @@
 import react from "react";
-import Login from "@/components/login/phonenumber";
+import Login from "@/components/login/phone-number";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
