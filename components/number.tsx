@@ -3,6 +3,7 @@ import React ,{useState}from "react";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { NUMBER } from "./constants/api";
 const Number = () => {
      const router = useRouter();
         const [phoneNumber, setPhoneNumber] = useState("");
@@ -20,7 +21,7 @@ const Number = () => {
                 const formData = new FormData();
                 formData.append("mobile", `+91${phoneNumber}`);
     
-                const response = await fetch("https://nexlearn.noviindusdemosites.in/auth/send-otp", {
+                const response = await fetch(NUMBER, {
                     method: "POST",
                     body: formData,
                 });
