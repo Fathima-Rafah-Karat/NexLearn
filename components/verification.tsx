@@ -3,6 +3,7 @@ import React ,{useState, useEffect} from "react";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { VERIFY_OTP } from "./constants/api";
 
 const verification=()=>{
       const router = useRouter();
@@ -58,7 +59,7 @@ const verification=()=>{
                 formData.append("mobile", mobile);
                 formData.append("otp", otp);
     
-                const response = await fetch("https://nexlearn.noviindusdemosites.in/auth/verify-otp", {
+                const response = await fetch(VERIFY_OTP, {
                     method: "POST",
                     body: formData,
                 });
