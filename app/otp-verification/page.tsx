@@ -1,101 +1,102 @@
-"use client";
-import { useState, useEffect } from "react";
+// "use client";
+// import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import Verification from "@/components/verification"
+// import { Input } from "@/components/ui/input";
+// import { useRouter } from "next/navigation";
+// import { Button } from "@/components/ui/button";
 
 const OtpVerification = () => {
-    const router = useRouter();
-    const [otp, setOtp] = useState("");
-    const [mobile, setMobile] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState("");
-    useEffect(() => {
-        const storedMobile = localStorage.getItem("userMobile");
-        if (storedMobile) {
-            setMobile(storedMobile);
-        } else {
-            router.push("/");
-        }
-    }, [router]);
-    const [resendStatus, setResendStatus] = useState("");
+    // const router = useRouter();
+    // const [otp, setOtp] = useState("");
+    // const [mobile, setMobile] = useState("");
+    // const [isLoading, setIsLoading] = useState(false);
+    // const [error, setError] = useState("");
+    // useEffect(() => {
+    //     const storedMobile = localStorage.getItem("userMobile");
+    //     if (storedMobile) {
+    //         setMobile(storedMobile);
+    //     } else {
+    //         router.push("/");
+    //     }
+    // }, [router]);
+    // const [resendStatus, setResendStatus] = useState("");
 
-    const handleResendOtp = async () => {
-        if (!mobile || resendStatus === "loading") return;
+    // const handleResendOtp = async () => {
+    //     if (!mobile || resendStatus === "loading") return;
 
-        setResendStatus("loading");
-        setError("");
+    //     setResendStatus("loading");
+    //     setError("");
 
-        try {
-            const formData = new FormData();
-            formData.append("mobile", mobile);
+    //     try {
+    //         const formData = new FormData();
+    //         formData.append("mobile", mobile);
 
-            const response = await fetch("https://nexlearn.noviindusdemosites.in/auth/send-otp", {
-                method: "POST",
-                body: formData,
-            });
+    //         const response = await fetch("https://nexlearn.noviindusdemosites.in/auth/send-otp", {
+    //             method: "POST",
+    //             body: formData,
+    //         });
 
-            if (!response.ok) throw new Error("Failed to resend");
+    //         if (!response.ok) throw new Error("Failed to resend");
 
-            setResendStatus("success");
-            setTimeout(() => setResendStatus(""), 3000);
-        } catch (err) {
-            setResendStatus("error");
-            setError("Failed to resend code. Please try again.");
-            console.error("Resend error:", err);
-        }
-    };
+    //         setResendStatus("success");
+    //         setTimeout(() => setResendStatus(""), 3000);
+    //     } catch (err) {
+    //         setResendStatus("error");
+    //         setError("Failed to resend code. Please try again.");
+    //         console.error("Resend error:", err);
+    //     }
+    // };
 
-    const handleVerifyOtp = async () => {
-        if (!otp) {
-            setError("Please enter the OTP");
-            return;
-        }
-        setIsLoading(true);
-        setError("");
-        try {
-            const formData = new FormData();
-            formData.append("mobile", mobile);
-            formData.append("otp", otp);
+    // const handleVerifyOtp = async () => {
+    //     if (!otp) {
+    //         setError("Please enter the OTP");
+    //         return;
+    //     }
+    //     setIsLoading(true);
+    //     setError("");
+    //     try {
+    //         const formData = new FormData();
+    //         formData.append("mobile", mobile);
+    //         formData.append("otp", otp);
 
-            const response = await fetch("https://nexlearn.noviindusdemosites.in/auth/verify-otp", {
-                method: "POST",
-                body: formData,
-            });
-            if (!response.ok) {
-                const contentType = response.headers.get("content-type");
-                if (contentType && contentType.includes("application/json")) {
-                    const errorData = await response.json();
-                    if (response.status === 400) {
-                        setError(errorData.message || "Invalid OTP or request.");
-                    } else if (response.status === 401) {
-                        setError("Unauthorized access. Please try again.");
-                    } else if (response.status === 500) {
-                        setError("Server error. Please try again later.");
-                    } else {
-                        setError(errorData.message || "Something went wrong.");
-                    }
-                } else {
-                    setError(`Error: ${response.status} ${response.statusText}`);
-                }
-                return;
-            }
-            const data = await response.json();
-            if (data.success) {
-                const token = data.token || data.access;
-                if (token) localStorage.setItem("authToken", token);
-                router.push("/add-details");
-            } else {
-                setError(data.message || "Invalid OTP");
-            }
-        } catch (err) {
-            setError("Something went wrong. Please check your connection.");
-            console.error("OTP verify error:", err);
-        } finally {
-            setIsLoading(false);
-        }
-    };
+    //         const response = await fetch("https://nexlearn.noviindusdemosites.in/auth/verify-otp", {
+    //             method: "POST",
+    //             body: formData,
+    //         });
+    //         if (!response.ok) {
+    //             const contentType = response.headers.get("content-type");
+    //             if (contentType && contentType.includes("application/json")) {
+    //                 const errorData = await response.json();
+    //                 if (response.status === 400) {
+    //                     setError(errorData.message || "Invalid OTP or request.");
+    //                 } else if (response.status === 401) {
+    //                     setError("Unauthorized access. Please try again.");
+    //                 } else if (response.status === 500) {
+    //                     setError("Server error. Please try again later.");
+    //                 } else {
+    //                     setError(errorData.message || "Something went wrong.");
+    //                 }
+    //             } else {
+    //                 setError(`Error: ${response.status} ${response.statusText}`);
+    //             }
+    //             return;
+    //         }
+    //         const data = await response.json();
+    //         if (data.success) {
+    //             const token = data.token || data.access;
+    //             if (token) localStorage.setItem("authToken", token);
+    //             router.push("/add-details");
+    //         } else {
+    //             setError(data.message || "Invalid OTP");
+    //         }
+    //     } catch (err) {
+    //         setError("Something went wrong. Please check your connection.");
+    //         console.error("OTP verify error:", err);
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    // };
 
     return (
         <div className="bg-black min-h-screen w-full flex items-center justify-center p-4 lg:p-10 overflow-y-auto font-inter">
@@ -111,7 +112,8 @@ const OtpVerification = () => {
                         </div>
                         <Image src="/image/photo1.png" alt="photo" width={335} height={260} priority className="mx-[63px] mb-[26px] w-auto h-auto" />
                     </div>
-                    <div className="bg-white m-[10px] px-[28px] pt-[28px] pb-[28px] rounded-xl  ">
+                    <Verification/>
+                    {/* <div className="bg-white m-[10px] px-[28px] pt-[28px] pb-[28px] rounded-xl  ">
                         <div className="xl:w-[339px] w-[320px] ">
                             <h1 className=" text-color-text text-size-24 font-semibold font-inter leading-[32px] tracking-[0px] pb-[16px]">Enter the code we texted you</h1>
                             <p className="text-color-text text-size-16 pb-[16px] font-inter font-normal">We’ve sent an SMS to {mobile || "+91 1122334455"}</p>
@@ -151,7 +153,7 @@ const OtpVerification = () => {
                                 </Button>
                             </form>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
