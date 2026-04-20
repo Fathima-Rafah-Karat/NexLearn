@@ -1,8 +1,11 @@
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://nexlearn.noviindusdemosites.in/";
 
-export const CREATE_PROFILE=`${BASE_URL}auth/create-profile`;
-export const NUMBER=`${BASE_URL}auth/send-otp`;
-export const VERIFY_OTP=`${BASE_URL}auth/verify-otp`;
-export const SUBMIT=`${BASE_URL}answers/submit`;
-export const LOGOUT=`${BASE_URL}auth/logout`;
-export const LIST=`${BASE_URL}question/list`;
+// Ensure base URL ends with a single slash
+const base = BASE_URL.endsWith("/") ? BASE_URL : `${BASE_URL}/`;
+
+export const CREATE_PROFILE = `${base}auth/create-profile`;
+export const NUMBER = `${base}auth/send-otp`;
+export const VERIFY_OTP = `${base}auth/verify-otp`;
+export const SUBMIT = `${base}answers/submit`;
+export const LOGOUT = `${base}auth/logout`;
+export const LIST = `${base}question/list`;
