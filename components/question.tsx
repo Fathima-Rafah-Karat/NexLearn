@@ -227,7 +227,7 @@ const Question =()=>{
     return(
         <div>
 
-                     <div className="flex-1 flex flex-col lg:flex-row overflow-hidden h-screen">
+                     <div className="flex-1 flex flex-col lg:flex-row lg:overflow-hidden lg:h-screen">
 
                 <div className="flex-1 flex flex-col bg-blue-50">
                     <div className="px-6 py-3.5 flex items-center justify-between bg-blue-50">
@@ -237,7 +237,7 @@ const Question =()=>{
                         </span>
                     </div>
 
-                    <div className="flex-1 px-6 scrollbar-hide">
+                    <div className="flex-1 px-4 sm:px-6 overflow-y-auto scrollbar-hide">
 
                         <div className="bg-white border border-[#E2E8F0] shadow-[0px_0px_12px_4px_#00000017] rounded-xl p-6 md:p-8 mb-3">
                             <Dialog>
@@ -356,7 +356,7 @@ const Question =()=>{
                                 </div>
                             </div>
                         </div>
-                        <div className="grid grid-cols-10 gap-x-2 gap-y-4  mb-8 overflow-y-auto scrollbar-hide pr-1 pt-3 pl-3 pb-3">
+                        <div className="grid grid-cols-5 sm:grid-cols-8 lg:grid-cols-10 gap-2 sm:gap-x-2 sm:gap-y-4 mb-8 overflow-y-auto scrollbar-hide pr-1 pt-3 pl-3 pb-3">
                             {questions.map((_, idx) => (
                                 <button
                                     key={idx}
